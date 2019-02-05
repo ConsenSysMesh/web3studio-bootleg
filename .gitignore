@@ -1,1 +1,10 @@
+## Jupyter
 .ipynb_checkpoints
+
+## Node
+node_modules
+*.log
+build/
+coverage/
+coverage.json
+.env

@@ -1,0 +1,4 @@
+node_modules
+
+packages/soy-contracts/node_modules
+packages/soy-gateway/node_modules
