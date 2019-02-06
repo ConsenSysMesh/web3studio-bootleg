@@ -2,10 +2,10 @@
   <br/>
   <a href='https://github.com/ConsenSys/web3studio-bootleg'><img
       width='250px'
-      alt='Bootleg'
-      src="https://user-images.githubusercontent.com/5770007/52348724-02aa0780-29f3-11e9-9039-71880d1af2b6.png" /></a>
+      alt='Helix'
+      src="https://user-images.githubusercontent.com/5770007/52375625-1a52b180-2a2e-11e9-955e-2eb06ad4b86d.png" /></a>
   <br/>
-  Helix Crypto
+  Crypto
   <br/>
 </h1>
 
