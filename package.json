@@ -17,7 +17,8 @@
     "lerna": "^3.10.8",
     "prettier": "^1.16.4",
     "pretty-quick": "^1.10.0",
-    "solium": "^1.2.2"
+    "solium": "^1.2.2",
+    "truffle": "^5.0.3"
   },
   "workspaces": {
     "packages": [

@@ -1,7 +1,7 @@
 {
-  "name": "bootleg-tokens",
+  "name": "bootleg-app-contracts",
   "version": "0.0.0",
-  "description": "Bootleg pay it backward tokens and contracts",
+  "description": "Bootleg application contracts",
   "author": "Web3Studio Developers <web3studio@consensys.net>",
   "homepage": "https://github.com/ConsenSys/web3studio-bootleg#readme",
   "license": "Apache-2.0",

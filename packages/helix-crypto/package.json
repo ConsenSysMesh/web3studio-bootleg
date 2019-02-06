@@ -1,7 +1,7 @@
 {
-  "name": "bootleg-tokens",
+  "name": "helix-crypto",
   "version": "0.0.0",
-  "description": "Bootleg pay it backward tokens and contracts",
+  "description": "Helix Crypto Library",
   "author": "Web3Studio Developers <web3studio@consensys.net>",
   "homepage": "https://github.com/ConsenSys/web3studio-bootleg#readme",
   "license": "Apache-2.0",
@@ -10,9 +10,7 @@
     "url": "git+https://github.com/ConsenSys/web3studio-bootleg.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "truffle": "truffle",
-    "build": "truffle compile"
+    "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/ConsenSys/web3studio-bootleg/issues"

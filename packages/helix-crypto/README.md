@@ -5,19 +5,20 @@
       alt='Bootleg'
       src="https://user-images.githubusercontent.com/5770007/52348724-02aa0780-29f3-11e9-9039-71880d1af2b6.png" /></a>
   <br/>
-  Tokens
+  Helix Crypto
   <br/>
 </h1>
 
 <h4 align="center">
- Pay-it-Backward Tokens
+ Crytpo Library for the Helix System
 </h4>
 
 <p align="center">
   <a href="#license">License</a>
 </p>
 
-The underlying smart contracts making up the token economy of the bootleg application.
+Library for encrypting a digital asset and then decrypting it adding a
+unique cryptographic watermark to the decrypted asset.
 
 <br/>
 
