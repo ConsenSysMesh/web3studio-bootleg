@@ -25,6 +25,12 @@ Read more about the project in the latest article about Bootleg on [Medium](http
 
 <br/>
 
+## Project overview
+
+This repo holds the code and development assets for the Bootleg SDK. The repo and many of the high level concepts in this project all pay homage to the original article about the idea published on Medium (link above). Whenever possible we have attempted to use more generic terms in our code and domain models so that as much code from this repo can be re-used, shared, re-purposed by anyone. We have done our best but it is a tradeoff between making something we feel embodies the spirit of the idea and speculating about would/would not be useful should someone decied to take our code and run with it.
+
+# Orientation
+
 ## Packages
 
 This is a monorepo that contains the projects that make bootleg rock 🎸. You can find
@@ -58,6 +64,13 @@ Reference contracts that the Helix system uses to make everything trustless.
 Everything comes together here. This is a simulated environment where you can see how to wire
 everything up and even tweak with some parameters for your dApp.
 
-## License
+### [`notebooks`](packages/examples/notebooks/)
+
+Early simulations of the pay-it-backward model.
+
+## Some other notable items...
+[architecture.md](docs/architecture.md) file contains drawings and description of the technical details of the project.
+
+# License
 
 As per usual, we are publishing under the [Apache 2.0 License](LICENSE).
