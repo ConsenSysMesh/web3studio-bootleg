@@ -10,7 +10,7 @@
     "url": "git+https://github.com/ConsenSys/web3studio-bootleg.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
+    "test": "solidity-coverage && istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
     "truffle": "truffle",
     "build": "truffle compile"
   },

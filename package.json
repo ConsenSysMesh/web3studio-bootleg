@@ -2,21 +2,23 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "test": "yarn lint",
-    "test:packages": "yarn lerna run test",
+    "test": "yarn lint && yarn test:packages",
+    "test:packages": "lerna run test --concurrency 1",
     "lint": "yarn eslint . && yarn solium -d .",
     "prettier": "prettier \"**/*.{js,json,css,md}\" --write",
-    "lerna:version": "yarn lerna version --no-push",
+    "lerna:version": "lerna version --no-push",
     "lerna:publish": "lerna publish from-package",
-    "postinstall": "yarn lerna run build"
+    "postinstall": "lerna run build"
   },
   "devDependencies": {
     "eslint": "^5.13.0",
     "eslint-config-web3studio": "^1.1.0",
     "husky": "^1.3.1",
+    "jest-matchers": "^20.0.3",
     "lerna": "^3.10.8",
     "prettier": "^1.16.4",
     "pretty-quick": "^1.10.0",
+    "solidity-coverage": "^0.5.11",
     "solium": "^1.2.2",
     "truffle": "^5.0.3"
   },
