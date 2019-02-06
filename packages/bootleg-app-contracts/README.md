@@ -5,19 +5,19 @@
       alt='Bootleg'
       src="https://user-images.githubusercontent.com/5770007/52348724-02aa0780-29f3-11e9-9039-71880d1af2b6.png" /></a>
   <br/>
-  Tokens
+  App Contracts
   <br/>
 </h1>
 
 <h4 align="center">
- Pay-it-Backward Tokens
+ Bootleg dApp Smart Contracts
 </h4>
 
 <p align="center">
   <a href="#license">License</a>
 </p>
 
-The underlying smart contracts making up the token economy of the bootleg application.
+A reference implementation for a Bootleg dApp's contracts.
 
 <br/>
 
