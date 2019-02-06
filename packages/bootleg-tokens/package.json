@@ -1,0 +1,22 @@
+{
+  "name": "bootleg-tokens",
+  "version": "0.0.0",
+  "description": "Bootleg pay it backward tokens and contracts",
+  "author": "Web3Studio Developers <web3studio@consensys.net>",
+  "homepage": "https://github.com/ConsenSys/web3studio-bootleg#readme",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ConsenSys/web3studio-bootleg.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "build": "truffle compile"
+  },
+  "bugs": {
+    "url": "https://github.com/ConsenSys/web3studio-bootleg/issues"
+  },
+  "devDependencies": {
+    "truffle": "^5.0.3"
+  }
+}
