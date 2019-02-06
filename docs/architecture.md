@@ -31,13 +31,13 @@ Bootlegger systems - The fictional company behind the Bootlegger product would n
 The Bootleg system runs on Ethereum through the use of Smart Contracts and a 721 compliant token.
 
 ### Token Design
-[!Token Design](TokenComposition.png)
+![Token Design](TokenComposition.png)
 
 ### Smart Contracts
-[!Smart Contract Models](SmartContractModels.png)
+![Smart Contract Models](SmartContractModels.png)
 
 ## General System Flow
-[!General System Flow](GeneralSystemFlow.png)
+![General System Flow](GeneralSystemFlow.png)
 
 ## Bootleg Creation Sequenc
-[!Bootleg Creation Sequence](BootlegCreationSequence.png)
+![Bootleg Creation Sequence](BootlegCreationSequence.png)
