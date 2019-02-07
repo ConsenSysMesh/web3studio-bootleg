@@ -126,6 +126,7 @@ In this diagram we have several smart contracts that would handle the on-chain b
 
 - **Single Edition Contract** - A 721 compliant token that also has additional managment ability to track who has access to the media stored in this Bootleg token. It also tracks who is the current leading member of the ownership chain and their royalty allocations.
 
+- **Pay-it-Back Contract** - A custom contract that acts as the "bank" to disperse payments of royalties to owners of the Single Editions (aka Bootleg print X of Y).
 
 ## License
 
