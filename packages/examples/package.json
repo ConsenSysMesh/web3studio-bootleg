@@ -11,7 +11,6 @@
     "url": "git+https://github.com/ConsenSys/web3studio-bootleg.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
     "truffle": "truffle",
     "build": "truffle compile"
   },

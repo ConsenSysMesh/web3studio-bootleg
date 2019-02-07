@@ -9,9 +9,7 @@
     "type": "git",
     "url": "git+https://github.com/ConsenSys/web3studio-bootleg.git"
   },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
-  },
+  "scripts": {},
   "bugs": {
     "url": "https://github.com/ConsenSys/web3studio-bootleg/issues"
   }
