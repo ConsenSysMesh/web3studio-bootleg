@@ -20,6 +20,7 @@
     "pretty-quick": "^1.10.0",
     "solidity-coverage": "^0.5.11",
     "solium": "^1.2.2",
+    "solium-config-web3studio": "^1.2.0",
     "truffle": "^5.0.3"
   },
   "workspaces": {
