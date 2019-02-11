@@ -55,7 +55,7 @@ watermark an asset to allow copyright holders to find who leaked their content.
 
 ### [`helix-contracts`](packages/helix-contracts)
 
-Reference contracts that the Helix system uses to make everything trustless.
+Reference contracts that the Helix system uses to make everything as trust-less as possible.
 
 ### [`examples`](packages/examples)
 
@@ -85,48 +85,41 @@ We are **imaging** that the system to support the story defined in Bootleg would
 - System for resolution of any disputes around ownership/access 
 - Ticketing system for issues with the quality of the Bootleg video/audio, access to decrypted videos, etc... (e.g. re-uploading a file, adjusting payouts, removing bad-actor members, offensive content, etc...)
 
-
 ### General System Flow
+
+The diagram below outlines the different users involved in the Bootleg process. Each group of users interacts with the product/application in different swim lanes that are somewhat independent from each other and cyclical.
+
 ![General System Flow](docs/images/GeneralSystemFlow.png)
 
-The diagram above outlines the different users involved in the Bootleg process. Each group of users interacts with the product/application in different swim lanes that are somewhat independent from each other and cyclical.
 
 ### Bootleg Creation Sequence
+
+The diagram below shows the sequence of events during the minting of new Bootleg tokens.
+
 ![Bootleg Creation Sequence](docs/images/BootlegCreationSequence.png)
 
-The diagram above shows the sequence of events during the minting of new Bootleg tokens.
 
 ### New Member Added Sequence
+
+The diagram below shows the sequence of events when someone pays for access to a Bootleg recording.
+
 ![New member added](docs/images/NewMemberAddedSequence.png)
-
-The diagram above shows the sequence of events when someone pays for access to a Bootleg recording.
-
 
 ### Ethereum
 
 The Bootleg system runs on Ethereum through the use of custom Smart Contracts and a 721 compliant tokens.
 
 #### Token Design
-![Token Design](docs/images/TokenComposition.png)
 
 The purpose of the token design diagram was to think about the structure of the conceptual Bootleg Token. It is composed of several domain areas, and then further decomposed into several functional blocks. Once we had these defined we set out to find existing tokens and projects that could be used for the project. We did not want to re-invent the wheel but if the wheel needs some extra bearings or fancy spokes we are okay with that.
 
 After our survey of what is out there (and there is a lot, much I'm not even mentioning here) we felt that the ERC721 contract design would handle 80% of what we needed and for the rest we would add in custom smart contracts for specific areas of functionality.
 
-#### Smart Contracts
-![Smart Contract Models](docs/images/SmartContractModels.png)
+![Token Design](docs/images/TokenComposition.png)
 
-In this diagram we have several smart contracts that would handle the on-chain bootleg related activities. The contracts are:
 
-- **Bootleg App Contract** - The main contract for the logic that drives the management and minting of new tokens in exchange for new unique media files. 
-
-- **Encryption Contract** - Responsible for the management of key exchange and security/protection of off-chain digital assets. 
-
-- **Editions Contract** - An attempt at a generic name, a new contract of this type is deployed for every new unique Bootleg media. It's job is to mint unique 721 style tokens for each edition of the media (e.i. "Concert recording X, number 1 of 100").
-
-- **Single Edition Contract** - A 721 compliant token that also has additional managment ability to track who has access to the media stored in this Bootleg token. It also tracks who is the current leading member of the ownership chain and their royalty allocations.
-
-- **Pay-it-Back Contract** - A custom contract that acts as the "bank" to disperse payments of royalties to owners of the Single Editions (aka Bootleg print X of Y).
+#### Domain models
+![App and Smart Contract Models](docs/images/DomainModel.png)
 
 ## License
 
