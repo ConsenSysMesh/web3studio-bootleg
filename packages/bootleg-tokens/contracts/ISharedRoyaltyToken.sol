@@ -20,9 +20,10 @@ contract ISharedRoyaltyToken is IERC721 {
    *  the last withdrawn payment up to a _count
    *
    * @param _tokenId The identifier for an NFT
+   * @param _franchisor address to withdraw payment for
    * @param _count The number of payments to traverse
    */
-  function withdrawPayment(uint256 _tokenId, uint256 _count) public;
+  function withdrawPayment(uint256 _tokenId, address _franchisor, uint256 _count) public;
 
   /**
    * @notice Withdraws remaining payment balance accumulated from transfer of a
@@ -31,8 +32,9 @@ contract ISharedRoyaltyToken is IERC721 {
    *   avoid double withdrawals
    *
    * @param _tokenId The identifier for an NFT
+   * @param _franchisor address to withdraw payment for
    */
-  function withdrawPayment(uint256 _tokenId) public;
+  function withdrawPayment(uint256 _tokenId, address _franchisor) public;
 
   /**
    * @notice Gets remaining payment balance accumulated from transfer of a
@@ -42,12 +44,13 @@ contract ISharedRoyaltyToken is IERC721 {
    *   it's own royalty model
    *
    * @param _tokenId The identifier for an NFT
+   * @param _franchisor address to get the payment balance of
    * @param _start The payment index to start from
    * @param _count The number of payments to traverse
    *
    * @return uint256 representing the balance in wei accumulated for a token
    */
-  function paymentBalanceOf(uint256 _tokenId, uint256 _start, uint256 _count) public view returns (uint256);
+  function paymentBalanceOf(uint256 _tokenId, address _franchisor, uint256 _start, uint256 _count) public view returns (uint256);
 
   /**
    * @notice Gets remaining payment balance accumulated from transfer of a
@@ -59,8 +62,9 @@ contract ISharedRoyaltyToken is IERC721 {
    * @dev Used by `withdrawPayment` to calculate how much a franchisor is owed.
    *
    * @param _tokenId The identifier for an NFT
+   * @param _franchisor address to get the payment balance of
    *
    * @return uint256 representing the balance in wei accumulated for a token
    */
-  function paymentBalanceOf(uint256 _tokenId) public view returns (uint256);
+  function paymentBalanceOf(uint256 _tokenId, address _franchisor) public view returns (uint256);
 }
