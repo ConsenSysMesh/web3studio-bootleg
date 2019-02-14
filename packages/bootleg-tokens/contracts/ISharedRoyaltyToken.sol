@@ -25,7 +25,7 @@ contract ISharedRoyaltyToken is IERC721 {
   function withdrawPayment(uint256 _tokenId, uint256 _count) public;
 
   /**
-   * @notice Withdraws non-withdrawn payment accumulated from transfer of a
+   * @notice Withdraws remaining payment balance accumulated from transfer of a
    *   given token
    * @dev Escrow should keep track of the payments that have been processed to
    *   avoid double withdrawals
@@ -35,10 +35,11 @@ contract ISharedRoyaltyToken is IERC721 {
   function withdrawPayment(uint256 _tokenId) public;
 
   /**
-   * @notice Gets balance of non-withdrawn payment accumulated from transfer of a
+   * @notice Gets remaining payment balance accumulated from transfer of a
    *   given token up to a number of provided payments
    * @dev Used by `withdrawPayment` to calculate how much a franchisor is owed.
-   * @dev Implement this function to
+   * @dev Every style of SharedRoyaltyToken will implement this function to create
+   *   it's own royalty model
    *
    * @param _tokenId The identifier for an NFT
    * @param _start The payment index to start from
@@ -49,11 +50,12 @@ contract ISharedRoyaltyToken is IERC721 {
   function paymentBalanceOf(uint256 _tokenId, uint256 _start, uint256 _count) public view returns (uint256);
 
   /**
-   * @notice Gets balance of non-withdrawn payment accumulated from transfer of a
+   * @notice Gets remaining payment balance accumulated from transfer of a
    *   given token that has not been withdrawn
    *
-   * @dev Defaults to overloaded `withdrawPayment` of a token's non-withdrawn balance
-   *   to the last payment
+   * @dev Calls the overloaded `withdrawPayment` with defaults of `_start` as
+   *  the last withdrawn payment index, and `_count` as the remaining payment
+   *  length
    * @dev Used by `withdrawPayment` to calculate how much a franchisor is owed.
    *
    * @param _tokenId The identifier for an NFT
