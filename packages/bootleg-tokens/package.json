@@ -19,5 +19,8 @@
   },
   "devDependencies": {
     "eth-gas-reporter": "^0.1.12"
+  },
+  "dependencies": {
+    "openzeppelin-solidity": "^2.1.2"
   }
 }
