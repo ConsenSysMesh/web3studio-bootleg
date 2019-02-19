@@ -1,5 +1,5 @@
-const MetaCoin = artifacts.require('MetaCoin');
+const TestSharedRoyaltyToken = artifacts.require('TestSharedRoyaltyToken');
 
 module.exports = function(deployer) {
-  deployer.deploy(MetaCoin);
+  deployer.deploy(TestSharedRoyaltyToken);
 };
