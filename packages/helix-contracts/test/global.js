@@ -1,0 +1,1 @@
+require('bootleg-common/mochaGlobal');

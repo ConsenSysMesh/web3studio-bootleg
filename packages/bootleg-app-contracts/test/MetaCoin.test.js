@@ -19,7 +19,7 @@ contract('MetaCoin', accounts => {
   };
 
   beforeEach(async () => {
-    metaCoinInstance = await MetaCoin.deployed();
+    metaCoinInstance = await MetaCoin.new();
   });
 
   it('should put 10000 MetaCoin in the first account', async () => {

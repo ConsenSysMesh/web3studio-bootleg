@@ -1,5 +1,1 @@
-if (__dirname.includes('coverageEnv')) {
-  module.exports = require('../../../truffle-config');
-} else {
-  module.exports = require('../../truffle-config');
-}
+module.exports = require('bootleg-common/truffle-config')(__dirname);
