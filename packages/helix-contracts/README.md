@@ -10,7 +10,7 @@
 </h1>
 
 <h4 align="center">
- Trustless DRM on Etherium
+ Trustless DRM on Ethereum
 </h4>
 
 <p align="center">
