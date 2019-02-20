@@ -1,37 +1,58 @@
 pragma solidity ^0.5.3;
 
 /**
-* @title Shared Royalty NFT Enumerable interface for franchisors
+* @title Shared royalty NFT enumerable interface for franchisors, payments, and tokens
 */
 contract ISharedRoyaltyTokenEnumerable {
 
   /**
-  * @notice Gets the total number of franchisors given a Token ID
-  * @param _tokenId The identifier of the NFT
-  * @return uint256 The number of franchisors
+  * @notice Gets the total number of franchisors given a token
+  * @param _token The identifier of the NFT
+  * @return uint256 The number of franchisors of that token
   */
-  function tokenFranchisorsTotal(uint256 _tokenId) public view returns (uint256 count);
+  function tokenFranchisorsTotal(uint256 _token) public view returns (uint256 count);
 
   /**
-  * @notice Gets the token franchisor for a given token at a specific index
-  * @param _tokenId The identifier of the NFT
-  * @param _index The index (should be less than total franchisors for the token)
+  * @notice Enumerates the token franchisors for a given token
+  * @dev Throws if `_index` >= `tokenFranchisorsTotal(_token)` or if
+  *   `_token` is the zero address, representing an invalid NFT.
+  * @param _index The index of the franchisor to return (should be less than total franchisors for the token)
+  * @param _token The identifier of the NFT
   * @return address The address of the franchisor
   */
-  function tokenFranchisorsByIndex(uint256 _index, uint256 _tokenId) public view returns (address owner);
+  function tokenFranchisorsByIndex(uint256 _index, uint256 _token) public view returns (address franchisor);
 
   /**
-  * @notice Gets the total number of payments given a Token ID
-  * @param _tokenId The identifier of the NFT
-  * @return uint256 The number of payments
+  * @notice Gets the total number of payments given a token
+  * @param _token The identifier of the NFT
+  * @return uint256 The number of payments made for the token
   */
-  function tokenPaymentsTotal(uint256 _tokenId) public view returns (uint256 count);
+  function tokenPaymentsTotal(uint256 _token) public view returns (uint256 count);
 
   /**
-  * @notice Gets the token payment for a given token at a specific index
-  * @param _tokenId The identifier of the NFT
-  * @param _index The index (should be less than total payments for the token)
+  * @notice Enumerates the token payments for a given token
+  * @dev Throws if `_index` >= `tokenPaymentsTotal(_token)` or if
+  *   `_token` is the zero address, representing invalid NFTs.
+  * @param _index The index of the payment to return (should be less than total payments for the token)
+  * @param _token The identifier of the NFT
   * @return unint256 The payment amount
   */
-  function tokenPaymentsByIndex(uint256 _index, uint256 _tokenId) public view returns (uint256 amount);
+  function tokenPaymentsByIndex(uint256 _index, uint256 _token) public view returns (uint256 amount);
+
+  /**
+  * @notice Gets the number of tokens owned by a given franchisor
+  * @param _franchisor The address of the franchisor
+  * @return uint256 The number of tokens franchised
+  */
+  function tokensOfFranchisorTotal(address _franchisor) public view returns (uint256 count);
+
+  /**
+  * @notice Enumerates the NFTs assigned to a franchisor
+  * @dev Throws if `_index` >= `tokensOfFranchisorTotal(_franchisor)` or if
+  *   `_token` is the zero address, representing an invalid address.
+  * @param _index The index of the token to return (should be less than total franchisor tokens)
+  * @param _franchisor Address of the franchisor owner
+  * @return uint256 The identifier of the NFT
+  */
+  function tokensOfFranchisorByIndex(uint256 _index, address _franchisor) public view returns (uint256 token);
 }
