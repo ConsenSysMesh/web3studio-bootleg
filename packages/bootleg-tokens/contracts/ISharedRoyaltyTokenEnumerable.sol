@@ -40,15 +40,8 @@ contract ISharedRoyaltyTokenEnumerable {
   function tokenPaymentsByIndex(uint256 _index, uint256 _token) public view returns (uint256 amount);
 
   /**
-  * @notice Gets the number of tokens owned by a given franchisor
-  * @param _franchisor The address of the franchisor
-  * @return uint256 The number of tokens franchised
-  */
-  function tokensOfFranchisorTotal(address _franchisor) public view returns (uint256 count);
-
-  /**
   * @notice Enumerates the NFTs assigned to a franchisor
-  * @dev Throws if `_index` >= `tokensOfFranchisorTotal(_franchisor)` or if
+  * @dev Throws if `_index` >= `franchisorBalanceOf(_franchisor)` or if
   *   `_franchisor` is the zero address, representing an invalid address.
   * @param _index The index of the token to return (should be less than total franchisor tokens)
   * @param _franchisor Address of the franchisor owner
