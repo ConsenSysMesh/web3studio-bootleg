@@ -1,0 +1,29 @@
+#!/usr/bin/env node
+
+const path = require('path');
+const fs = require('fs');
+const mm = require('micromatch');
+
+const coverageFile = path.join(process.cwd(), 'coverage/coverage.json');
+const coverageData = require(coverageFile);
+
+const ignorePatterns = ['**/node_modules/**', '**/Migrations.sol'];
+const coveredFiles = Object.keys(coverageData);
+
+if (coveredFiles.length < 1) {
+  console.error("Couldn't find any covered files");
+  process.exit(1);
+}
+
+const ignoredCoverageData = coveredFiles
+  .filter(path => !mm.some(path, ignorePatterns))
+  .reduce((data, key) => {
+    data[key] = coverageData[key];
+    return data;
+  }, {});
+
+fs.writeFileSync(
+  coverageFile,
+  JSON.stringify(ignoredCoverageData, null, 2),
+  'utf8'
+);

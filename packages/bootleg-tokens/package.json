@@ -10,15 +10,12 @@
     "url": "git+https://github.com/ConsenSys/web3studio-bootleg.git"
   },
   "scripts": {
-    "test": "solidity-coverage && istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
+    "test": "bootleg-truffle-test",
     "truffle": "truffle",
     "build": "truffle compile"
   },
   "bugs": {
     "url": "https://github.com/ConsenSys/web3studio-bootleg/issues"
-  },
-  "devDependencies": {
-    "eth-gas-reporter": "^0.1.12"
   },
   "dependencies": {
     "openzeppelin-solidity": "^2.1.2"

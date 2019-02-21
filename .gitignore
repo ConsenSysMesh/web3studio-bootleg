@@ -4,7 +4,9 @@
 ## Node
 node_modules
 *.log
-build/
 coverage/
-coverage.json
 .env
+
+## Eth
+build/
+.0x-artifacts/

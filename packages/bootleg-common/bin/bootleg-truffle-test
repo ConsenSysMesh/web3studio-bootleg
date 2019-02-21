@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Exit script as soon as a command fails.
+set -e
+
+. bootleg-setup-ganache
+
+truffle test && bootleg-coverage-ignore && \
+istanbul report text html && \
+istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100
