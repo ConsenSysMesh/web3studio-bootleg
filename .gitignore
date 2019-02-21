@@ -10,3 +10,6 @@ coverage/
 ## Eth
 build/
 .0x-artifacts/
+
+## Test coverage
+coverage.json
