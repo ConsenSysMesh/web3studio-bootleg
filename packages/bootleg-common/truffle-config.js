@@ -4,9 +4,11 @@ const {
   TruffleArtifactAdapter,
   CoverageSubprovider
 } = require('@0x/sol-coverage');
+const { RevertTraceSubprovider } = require('@0x/sol-trace');
 
 const solcVersion = '0.5.4';
 const defaultFromAddress = '0x627306090abab3a6e1400e9345bc60c78a8bef57';
+const isVerbose = true;
 
 module.exports = projectRoot => {
   const provider = new ProviderEngine();
@@ -17,7 +19,7 @@ module.exports = projectRoot => {
   const coverageSubProvider = new CoverageSubprovider(
     artifactAdapter,
     defaultFromAddress,
-    true
+    isVerbose
   );
 
   let providerStarted = false;
@@ -25,6 +27,10 @@ module.exports = projectRoot => {
   global.coverageSubProvider = coverageSubProvider;
 
   provider.addProvider(coverageSubProvider);
+
+  provider.addProvider(
+    new RevertTraceSubprovider(artifactAdapter, defaultFromAddress, isVerbose)
+  );
 
   provider.send = provider.sendAsync.bind(provider);
 
