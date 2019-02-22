@@ -17,7 +17,8 @@
     "bootleg-setup-ganache": "./bin/bootleg-setup-ganache",
     "bootleg-coverage-ignore": "./bin/bootleg-coverage-ignore"
   },
-  "devDependencies": {
+  "dependencies": {
+    "cosmiconfig": "^5.1.0",
     "micromatch": "^3.1.10"
   }
 }
