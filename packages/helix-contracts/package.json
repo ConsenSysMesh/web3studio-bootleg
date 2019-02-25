@@ -1,6 +1,7 @@
 {
   "name": "helix-contracts",
   "version": "0.0.0",
+  "private": true,
   "description": "Helix smart contracts",
   "author": "Web3Studio Developers <web3studio@consensys.net>",
   "homepage": "https://github.com/ConsenSys/web3studio-bootleg#readme",

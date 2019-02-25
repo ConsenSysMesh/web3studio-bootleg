@@ -14,3 +14,13 @@ before_install:
 branches:
   only:
     - master
+
+before_deploy:
+  - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
+
+deploy:
+  - provider: script
+    script: 'yarn lerna:publish --yes'
+    skip_cleanup: true
+    on:
+      branch: master
