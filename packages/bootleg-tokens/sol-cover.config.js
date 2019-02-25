@@ -1,3 +1,8 @@
 module.exports = {
-  coveragePathIgnorePatterns: ['**/node_modules/**', '**/Migrations.sol']
+  coveragePathIgnorePatterns: [
+    '**/node_modules/**',
+    '**/Migrations.sol',
+    '**/contracts/ERC721/**.sol',
+    '**/contracts/I*.sol'
+  ]
 };
