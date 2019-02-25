@@ -156,10 +156,7 @@ contract AbstractSharedRoyaltyToken is ISharedRoyaltyToken, ERC721 {
   {
     Token storage token = _tokens[tokenId];
 
-    // also check first index
-    bool isFranchisedToken = token.franchisorNextWithdrawIndex[franchisor] > 0;
-
-    require(isFranchisedToken, "Payments can only be withdrawn by franchisors");
+    require(_isFranchisor(franchisor, tokenId), "Payments can only be withdrawn by franchisors");
 
     return token.payments.length.sub(token.franchisorNextWithdrawIndex[franchisor]);
   }
@@ -190,7 +187,22 @@ contract AbstractSharedRoyaltyToken is ISharedRoyaltyToken, ERC721 {
     token.franchisors.push(franchisor);
     token.payments.push(payment);
     _franchisorTokensCount[franchisor] = _franchisorTokensCount[franchisor].add(1);
-    token.franchisorNextWithdrawIndex[franchisor] = token.payments.length;
+
+    if (!_isFranchisor(franchisor, tokenId)) {
+      token.franchisorNextWithdrawIndex[franchisor] = token.payments.length;
+    }
+  }
+
+  /**
+   * @notice Internal function to check if an account is a franchisor of a token
+   *
+   * @param franchisor The franchisor address
+   * @param tokenId uint256 ID of the token to check
+   */
+  function _isFranchisor(address franchisor, uint256 tokenId) internal view returns(bool) {
+    Token storage token = _tokens[tokenId];
+
+    return token.franchisorNextWithdrawIndex[franchisor] > 0;
   }
 
   /**
