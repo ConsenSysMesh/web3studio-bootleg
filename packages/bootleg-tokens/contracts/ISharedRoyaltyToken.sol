@@ -1,6 +1,6 @@
 pragma solidity ^0.5.3;
 
-import "openzeppelin-solidity/contracts/token/ERC721/IERC721.sol";
+import "./ERC721/IERC721.sol";
 
 /**
  * @title Shared Royalty Non-Fungible Token Standard basic interface
