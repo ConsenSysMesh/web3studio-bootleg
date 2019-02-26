@@ -61,9 +61,13 @@ contract('BootlegToken', accounts => {
 
   beforeEach(async () => {
     tokenId = web3.utils.asciiToHex('super awesome token id');
-    token = await BootlegToken.new();
+    token = await BootlegToken.new('Bootleg', 'BLEG');
 
-    await token.mint(accounts[0], tokenId);
+    await token.mintWithTokenURI(
+      accounts[0],
+      tokenId,
+      'https://ipfs.infura.io/ipfs/QmSomeHash'
+    );
   });
 
   it('should support ERC165', async () => {
