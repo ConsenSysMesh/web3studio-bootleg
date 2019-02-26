@@ -1,5 +1,5 @@
-const MetaCoin = artifacts.require('MetaCoin');
+const BootlegToken = artifacts.require('BootlegToken');
 
 module.exports = function(deployer) {
-  deployer.deploy(MetaCoin);
+  deployer.deploy(BootlegToken);
 };

@@ -16,5 +16,8 @@
   },
   "bugs": {
     "url": "https://github.com/ConsenSys/web3studio-bootleg/issues"
+  },
+  "dependencies": {
+    "bootleg-tokens": "^0.0.1"
   }
 }
