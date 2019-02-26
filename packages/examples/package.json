@@ -1,7 +1,7 @@
 {
   "name": "bootleg-examples",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Bootleg application examples",
   "author": "Web3Studio Developers <web3studio@consensys.net>",
   "homepage": "https://github.com/ConsenSys/web3studio-bootleg#readme",

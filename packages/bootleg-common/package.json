@@ -1,6 +1,7 @@
 {
   "name": "bootleg-common",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "private": true,
   "description": "Common code shared across bootleg projects",
   "author": "Web3Studio Developers <web3studio@consensys.net>",
   "homepage": "https://github.com/ConsenSys/web3studio-bootleg#readme",
