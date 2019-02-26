@@ -169,4 +169,34 @@ contract('AbstractSharedRoyaltyToken', accounts => {
       'Payments can only be withdrawn by franchisors'
     );
   });
+
+  it('Should allow franchisor cycles', async () => {
+    expect(await franchisorWithdrawPaymentsLeft(accounts[0])).toEqual(0);
+
+    await token.transferFrom(accounts[0], accounts[1], tokenId, {
+      from: accounts[0],
+      value: oneEthInWei
+    });
+
+    await token.transferFrom(accounts[1], accounts[2], tokenId, {
+      from: accounts[1],
+      value: oneEthInWei
+    });
+
+    // Introduce a cycle
+    await token.transferFrom(accounts[2], accounts[0], tokenId, {
+      from: accounts[2],
+      value: oneEthInWei
+    });
+
+    await token.transferFrom(accounts[0], accounts[3], tokenId, {
+      from: accounts[0],
+      value: oneEthInWei
+    });
+
+    expect(await franchisorWithdrawPaymentsLeft(accounts[0])).toEqual(4);
+    expect(await tokenPaymentBalance(accounts[0])).toEqual(
+      web3.utils.toWei('2', 'ether')
+    );
+  });
 });
