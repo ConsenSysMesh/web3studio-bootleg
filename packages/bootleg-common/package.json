@@ -20,6 +20,10 @@
   },
   "dependencies": {
     "cosmiconfig": "^5.1.0",
-    "micromatch": "^3.1.10"
+    "micromatch": "^3.1.10",
+    "web3": "1.0.0-beta.35"
+  },
+  "devDependencies": {
+    "truffle-hdwallet-provider": "^1.0.0-web3one.5"
   }
 }

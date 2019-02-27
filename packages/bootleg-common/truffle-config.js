@@ -5,13 +5,27 @@ const {
   CoverageSubprovider
 } = require('@0x/sol-coverage');
 const { RevertTraceSubprovider } = require('@0x/sol-trace');
+const HDWalletProvider = require('truffle-hdwallet-provider');
+const Web3 = require('web3');
+
+require('dotenv').config();
+
+const mnemonic = process.env.WALLET_MNEMONIC;
+const infuraApiKey = process.env.INFURA_API_KEY;
 
 const solcVersion = '0.5.4';
 const defaultFromAddress = '0x627306090abab3a6e1400e9345bc60c78a8bef57';
 const isVerbose = true;
 
-module.exports = projectRoot => {
-  const provider = new ProviderEngine();
+/**
+ * Create's a test provider using 0x tracing and coverage
+ *
+ * @param {string} projectRoot - path of project using this config
+ * @returns {ProviderEngine} A web3 provider
+ * @private
+ */
+const createTestProvider = projectRoot => {
+  const testProvider = new ProviderEngine();
   const artifactAdapter = new TruffleArtifactAdapter(
     `${projectRoot}`,
     solcVersion
@@ -22,30 +36,49 @@ module.exports = projectRoot => {
     isVerbose
   );
 
-  let providerStarted = false;
-
   global.coverageSubProvider = coverageSubProvider;
 
-  provider.addProvider(coverageSubProvider);
+  testProvider.addProvider(coverageSubProvider);
 
-  provider.addProvider(
+  testProvider.addProvider(
     new RevertTraceSubprovider(artifactAdapter, defaultFromAddress, isVerbose)
   );
 
-  provider.send = provider.sendAsync.bind(provider);
+  testProvider.send = testProvider.sendAsync.bind(testProvider);
+
+  return testProvider;
+};
+
+/**
+ * Create's a provider for a given network
+ *
+ * @param {string} network - Infura network string (rinkeby, ropsten, mainnet, etc)
+ * @returns {Function} function used for truffle config
+ * @private
+ */
+const infuraProvider = network => () =>
+  new HDWalletProvider(
+    mnemonic,
+    `https://${network}.infura.io/v3/${infuraApiKey}`
+  );
+
+module.exports = projectRoot => {
+  const testProvider = createTestProvider(projectRoot);
+  let testProviderStarted = false;
 
   return {
     networks: {
       test: {
         provider: () => {
-          if (!providerStarted) {
+          if (!testProviderStarted) {
             // Within this function to not start the provider until it's needed
-            provider.addProvider(
+            testProvider.addProvider(
               new WebsocketProvider({ rpcUrl: 'http://localhost:8545' })
             );
 
-            provider.start(err => {
-              providerStarted = true;
+            testProvider.start(err => {
+              testProviderStarted = true;
+
               if (err !== undefined) {
                 // eslint-disable-next-line no-console
                 console.log('Failed to start provider', err);
@@ -54,9 +87,26 @@ module.exports = projectRoot => {
             });
           }
 
-          return provider;
+          return testProvider;
         },
         network_id: '*'
+      },
+      mainnet: {
+        provider: infuraProvider('mainnet'),
+        network_id: '1',
+        // When deploying to mainnet check https://ethgasstation.info/ for
+        // current gas price. "Standard" suggested
+        gasPrice: Web3.utils.toWei('0', 'gwei')
+      },
+      ropsten: {
+        provider: infuraProvider('ropsten'),
+        network_id: '3',
+        gasPrice: Web3.utils.toWei('20', 'gwei')
+      },
+      rinkeby: {
+        provider: infuraProvider('rinkeby'),
+        network_id: '4',
+        gasPrice: Web3.utils.toWei('10', 'gwei')
       }
     },
     // Configure your compilers

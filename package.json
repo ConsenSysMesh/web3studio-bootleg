@@ -14,6 +14,7 @@
     "@0x/sol-coverage": "^2.0.3",
     "@0x/sol-trace": "^2.0.4",
     "chokidar-cli": "^1.2.2",
+    "dotenv": "^6.2.0",
     "eslint": "^5.13.0",
     "eslint-config-web3studio": "^1.1.0",
     "ganache-cli": "^6.3.0",
