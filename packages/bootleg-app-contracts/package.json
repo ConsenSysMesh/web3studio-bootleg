@@ -11,10 +11,14 @@
   },
   "scripts": {
     "test": "bootleg-truffle-test",
+    "test:watch": ". bootleg-setup-ganache; chokidar --initial \"test/**/*.js\" \"contracts/**/*.sol\" -c \"yarn test\"",
     "truffle": "truffle",
     "build": "truffle compile"
   },
   "bugs": {
     "url": "https://github.com/ConsenSys/web3studio-bootleg/issues"
+  },
+  "dependencies": {
+    "bootleg-tokens": "^0.0.1"
   }
 }
