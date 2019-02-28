@@ -6,9 +6,12 @@ import "./ERC721/ERC721Mintable.sol";
 /**
  * @title Shared Royalty Non-Fungible Token Standard basic interface
  */
-contract BookendSharedRoyaltyToken is AbstractSharedRoyaltyToken, ERC721Mintable{
-    
 
+contract BookendSharedRoyaltyToken is AbstractSharedRoyaltyToken, ERC721Mintable{
+    uint256 franchisorPercentage;   
+    constructor(uint256 _franchisorPercentage) public {
+        franchisorPercentage = _franchisorPercentage;
+    }
   /**
      * @notice Calculates the balance owned to the given franchisor, using
     ***the bookend model, where only the first franchisor and the last
@@ -26,13 +29,13 @@ contract BookendSharedRoyaltyToken is AbstractSharedRoyaltyToken, ERC721Mintable
         maxCount = maxCount > token.payments.length ? token.payments.length : maxCount;
         uint256 payment = 0;
         if(franchisor == _tokens[tokenId].franchisors[0]){
-            for(uint i = start; i<maxCount; i++){
-                payment = payment + (token.payments[i]/2);
+            for(uint256 i = start; i<maxCount; i++){
+                payment = payment + (token.payments[i] * (100 - franchisorPercentage))/100;
             }
         } 
         for (uint256 i = start; i < maxCount; i += 1) {
           if (token.franchisors[i - 1] == franchisor) {
-            payment += token.payments[i] % 2 == 0 ? token.payments[i] / 2 : token.payments[i]/2 + 1;
+            payment += (token.payments[i] * franchisorPercentage) % 100  == 0 ? (token.payments[i] * franchisorPercentage)/100  : (token.payments[i]  * franchisorPercentage)/100 + 1;
           }
         }
         
