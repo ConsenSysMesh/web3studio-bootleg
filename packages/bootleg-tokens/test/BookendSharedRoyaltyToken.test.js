@@ -10,27 +10,27 @@ contract('BookendSharedRoyaltyToken', accounts => {
   const tokenId = 1;
 
   it('should return amount of first sale for minter', async () => {
-    token = await BookendSharedRoyaltyToken.new(50);
-    mint = await token.mint(accountOne, tokenId);
+    const token = await BookendSharedRoyaltyToken.new(50);
+    await token.mint(accountOne, tokenId);
     await token.transferFrom(accountOne, accountTwo, tokenId, {
       value: 5
     });
-    event = await token.withdrawPayment(accountOne, tokenId);
+    const event = await token.withdrawPayment(accountOne, tokenId);
     expect(parseInt(event.logs[0].args.weiAmount)).toEqual(5);
   });
 
   it('should return 0 because franchisor withdraws before selling token', async () => {
-    token = await BookendSharedRoyaltyToken.new(50);
-    mint = await token.mint(accountOne, tokenId);
+    const token = await BookendSharedRoyaltyToken.new(50);
+    await token.mint(accountOne, tokenId);
     await token.transferFrom(accountOne, accountTwo, tokenId, {
       value: 5
     });
-    event = await token.withdrawPayment(accountTwo, tokenId);
+    const event = await token.withdrawPayment(accountTwo, tokenId);
     expect(parseInt(event.logs[0].args.weiAmount)).toEqual(0);
   });
   it('should return 0 because franchisor tries to withdraw twice', async () => {
-    token = await BookendSharedRoyaltyToken.new(50);
-    mint = await token.mint(accountOne, tokenId);
+    const token = await BookendSharedRoyaltyToken.new(50);
+    await token.mint(accountOne, tokenId);
     await token.transferFrom(accountOne, accountTwo, tokenId, {
       value: 5
     });
@@ -40,15 +40,15 @@ contract('BookendSharedRoyaltyToken', accounts => {
       value: 6
     });
 
-    event = await token.withdrawPayment(accountTwo, tokenId);
+    let event = await token.withdrawPayment(accountTwo, tokenId);
     expect(parseInt(event.logs[0].args.weiAmount)).toEqual(3);
     event = await token.withdrawPayment(accountTwo, tokenId);
     expect(parseInt(event.logs[0].args.weiAmount)).toEqual(0);
   });
 
   it('should return the sum of half of all payments for minter', async () => {
-    token = await BookendSharedRoyaltyToken.new(50);
-    mint = await token.mint(accountOne, tokenId);
+    const token = await BookendSharedRoyaltyToken.new(50);
+    await token.mint(accountOne, tokenId);
     await token.transferFrom(accountOne, accountTwo, tokenId, {
       value: 5
     });
@@ -57,23 +57,26 @@ contract('BookendSharedRoyaltyToken', accounts => {
       from: accountTwo,
       value: 6
     });
-    accountOneWithdrawal = await token.withdrawPayment(accountOne, tokenId);
+    const accountOneWithdrawal = await token.withdrawPayment(
+      accountOne,
+      tokenId
+    );
     expect(parseInt(accountOneWithdrawal.logs[0].args.weiAmount)).toEqual(8);
   });
 
   it('should return first sale for minter', async () => {
-    token = await BookendSharedRoyaltyToken.new(25);
-    mint = await token.mint(accountOne, tokenId);
+    const token = await BookendSharedRoyaltyToken.new(25);
+    await token.mint(accountOne, tokenId);
     await token.transferFrom(accountOne, accountTwo, tokenId, {
       value: 5
     });
-    event = await token.withdrawPayment(accountOne, tokenId);
+    const event = await token.withdrawPayment(accountOne, tokenId);
     expect(parseInt(event.logs[0].args.weiAmount)).toEqual(5);
   });
 
   it('should return 25% of sale for franchisor', async () => {
-    token = await BookendSharedRoyaltyToken.new(25);
-    mint = await token.mint(accountOne, tokenId);
+    const token = await BookendSharedRoyaltyToken.new(25);
+    await token.mint(accountOne, tokenId);
     await token.transferFrom(accountOne, accountTwo, tokenId, {
       value: 100
     });
@@ -83,13 +86,13 @@ contract('BookendSharedRoyaltyToken', accounts => {
       value: 101
     });
 
-    event = await token.withdrawPayment(accountTwo, tokenId);
+    const event = await token.withdrawPayment(accountTwo, tokenId);
     expect(parseInt(event.logs[0].args.weiAmount)).toEqual(26);
   });
 
   it('should return the sum of 75% of all payments for minter', async () => {
-    token = await BookendSharedRoyaltyToken.new(25);
-    mint = await token.mint(accountOne, tokenId);
+    const token = await BookendSharedRoyaltyToken.new(25);
+    await token.mint(accountOne, tokenId);
     await token.transferFrom(accountOne, accountTwo, tokenId, {
       value: 100
     });
@@ -98,7 +101,10 @@ contract('BookendSharedRoyaltyToken', accounts => {
       from: accountTwo,
       value: 100
     });
-    accountOneWithdrawal = await token.withdrawPayment(accountOne, tokenId);
+    const accountOneWithdrawal = await token.withdrawPayment(
+      accountOne,
+      tokenId
+    );
     expect(parseInt(accountOneWithdrawal.logs[0].args.weiAmount)).toEqual(175);
   });
 });
