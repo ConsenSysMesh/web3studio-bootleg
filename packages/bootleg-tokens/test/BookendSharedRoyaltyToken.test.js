@@ -1,4 +1,5 @@
 const expect = require('jest-matchers');
+const sharedRoyaltyBehavoir = require('./sharedRoyaltyToken.behavoir');
 const BookendSharedRoyaltyToken = artifacts.require(
   'BookendSharedRoyaltyToken'
 );
@@ -9,102 +10,215 @@ contract('BookendSharedRoyaltyToken', accounts => {
   const accountThree = accounts[2];
   const tokenId = 1;
 
-  it('should return amount of first sale for minter', async () => {
-    const token = await BookendSharedRoyaltyToken.new(50);
+  //count is less than payment.length
+  it('count->minter->franchisor->integer', async () => {
+    const token = await BookendSharedRoyaltyToken.new(5);
     await token.mint(accountOne, tokenId);
     await token.transferFrom(accountOne, accountTwo, tokenId, {
-      value: 5
+      value: 10
     });
     const event = await token.withdrawPayment(accountOne, tokenId);
-    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(5);
-  });
+    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(10);
+  }); //minter -> franchisor -> payment is not integer
 
-  it('should return 0 because franchisor withdraws before selling token', async () => {
-    const token = await BookendSharedRoyaltyToken.new(50);
+  it('count -> minter -> franchisor -> non-integer', async () => {
+    const token = await BookendSharedRoyaltyToken.new(5);
     await token.mint(accountOne, tokenId);
     await token.transferFrom(accountOne, accountTwo, tokenId, {
-      value: 5
+      value: 7
     });
-    const event = await token.withdrawPayment(accountTwo, tokenId);
-    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(0);
+    const event = await token.withdrawPayment(accountOne, 1, tokenId);
+    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(7);
   });
-  it('should return 0 because franchisor tries to withdraw twice', async () => {
-    const token = await BookendSharedRoyaltyToken.new(50);
+  it('count -> minter -> non franchisor -> non-integer', async () => {
+    const token = await BookendSharedRoyaltyToken.new(5);
     await token.mint(accountOne, tokenId);
     await token.transferFrom(accountOne, accountTwo, tokenId, {
-      value: 5
+      value: 10
     });
-
+    await token.withdrawPayment(accountOne, 1, tokenId);
     await token.transferFrom(accountTwo, accountThree, tokenId, {
       from: accountTwo,
-      value: 6
+      value: 10
     });
-
-    let event = await token.withdrawPayment(accountTwo, tokenId);
-    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(3);
-    event = await token.withdrawPayment(accountTwo, tokenId);
-    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(0);
+    const event = await token.withdrawPayment(accountOne, 1, tokenId);
+    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(9);
   });
 
-  it('should return the sum of half of all payments for minter', async () => {
-    const token = await BookendSharedRoyaltyToken.new(50);
+  it('count -> minter -> non franchisor -> integer', async () => {
+    const token = await BookendSharedRoyaltyToken.new(5);
     await token.mint(accountOne, tokenId);
     await token.transferFrom(accountOne, accountTwo, tokenId, {
-      value: 5
+      value: 10
     });
-
+    await token.withdrawPayment(accountOne, 1, tokenId);
     await token.transferFrom(accountTwo, accountThree, tokenId, {
       from: accountTwo,
-      value: 6
-    });
-    const accountOneWithdrawal = await token.withdrawPayment(
-      accountOne,
-      tokenId
-    );
-    expect(parseInt(accountOneWithdrawal.logs[0].args.weiAmount)).toEqual(8);
-  });
-
-  it('should return first sale for minter', async () => {
-    const token = await BookendSharedRoyaltyToken.new(25);
-    await token.mint(accountOne, tokenId);
-    await token.transferFrom(accountOne, accountTwo, tokenId, {
-      value: 5
-    });
-    const event = await token.withdrawPayment(accountOne, tokenId);
-    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(5);
-  });
-
-  it('should return 25% of sale for franchisor', async () => {
-    const token = await BookendSharedRoyaltyToken.new(25);
-    await token.mint(accountOne, tokenId);
-    await token.transferFrom(accountOne, accountTwo, tokenId, {
       value: 100
     });
+    const event = await token.withdrawPayment(accountOne, 1, tokenId);
+    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(95);
+  });
 
+  it('count -> non-minter -> franchisor -> integer', async () => {
+    const token = await BookendSharedRoyaltyToken.new(5);
+    await token.mint(accountOne, tokenId);
+    await token.transferFrom(accountOne, accountTwo, tokenId, {
+      value: 10
+    });
+    await token.transferFrom(accountTwo, accountThree, tokenId, {
+      from: accountTwo,
+      value: 100
+    });
+    const event = await token.withdrawPayment(accountTwo, 1, tokenId);
+    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(5);
+  });
+
+  it('count -> non-minter -> franchisor -> non-integer', async () => {
+    const token = await BookendSharedRoyaltyToken.new(5);
+    await token.mint(accountOne, tokenId);
+    await token.transferFrom(accountOne, accountTwo, tokenId, {
+      value: 10
+    });
     await token.transferFrom(accountTwo, accountThree, tokenId, {
       from: accountTwo,
       value: 101
     });
-
-    const event = await token.withdrawPayment(accountTwo, tokenId);
-    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(26);
+    const event = await token.withdrawPayment(accountTwo, 1, tokenId);
+    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(6);
   });
 
-  it('should return the sum of 75% of all payments for minter', async () => {
-    const token = await BookendSharedRoyaltyToken.new(25);
+  it('count -> non-minter -> non-franchisor -> non-integer', async () => {
+    const token = await BookendSharedRoyaltyToken.new(5);
     await token.mint(accountOne, tokenId);
     await token.transferFrom(accountOne, accountTwo, tokenId, {
-      value: 100
+      value: 10
     });
+    await token.transferFrom(accountTwo, accountThree, tokenId, {
+      from: accountTwo,
+      value: 101
+    });
+    const event = await token.withdrawPayment(accountThree, 1, tokenId);
+    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(0);
+  });
 
+  it('count -> non-minter -> non-franchisor -> integer', async () => {
+    const token = await BookendSharedRoyaltyToken.new(5);
+    await token.mint(accountOne, tokenId);
+    await token.transferFrom(accountOne, accountTwo, tokenId, {
+      value: 10
+    });
     await token.transferFrom(accountTwo, accountThree, tokenId, {
       from: accountTwo,
       value: 100
     });
-    const accountOneWithdrawal = await token.withdrawPayment(
-      accountOne,
-      tokenId
-    );
-    expect(parseInt(accountOneWithdrawal.logs[0].args.weiAmount)).toEqual(175);
+    const event = await token.withdrawPayment(accountThree, 1, tokenId);
+    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(0);
+  });
+
+  //count is greater than payment.length
+  it('countTooBig->minter->franchisor->integer', async () => {
+    const token = await BookendSharedRoyaltyToken.new(5);
+    await token.mint(accountOne, tokenId);
+    await token.transferFrom(accountOne, accountTwo, tokenId, {
+      value: 10
+    });
+    const event = await token.withdrawPayment(accountOne, 3, tokenId);
+    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(10);
+  }); //minter -> franchisor -> payment is not integer
+
+  it('countTooBig -> minter -> franchisor -> non-integer', async () => {
+    const token = await BookendSharedRoyaltyToken.new(5);
+    await token.mint(accountOne, tokenId);
+    await token.transferFrom(accountOne, accountTwo, tokenId, {
+      value: 7
+    });
+    const event = await token.withdrawPayment(accountOne, 3, tokenId);
+    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(7);
+  });
+  it('countTooBig -> minter -> non franchisor -> non-integer', async () => {
+    const token = await BookendSharedRoyaltyToken.new(5);
+    await token.mint(accountOne, tokenId);
+    await token.transferFrom(accountOne, accountTwo, tokenId, {
+      value: 10
+    });
+    await token.withdrawPayment(accountOne, 1, tokenId);
+    await token.transferFrom(accountTwo, accountThree, tokenId, {
+      from: accountTwo,
+      value: 10
+    });
+    const event = await token.withdrawPayment(accountOne, 4, tokenId);
+    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(9);
+  });
+
+  it('countTooBig -> minter -> non franchisor -> integer', async () => {
+    const token = await BookendSharedRoyaltyToken.new(5);
+    await token.mint(accountOne, tokenId);
+    await token.transferFrom(accountOne, accountTwo, tokenId, {
+      value: 10
+    });
+    await token.withdrawPayment(accountOne, 1, tokenId);
+    await token.transferFrom(accountTwo, accountThree, tokenId, {
+      from: accountTwo,
+      value: 100
+    });
+    const event = await token.withdrawPayment(accountOne, 4, tokenId);
+    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(95);
+  });
+
+  it('countTooBig -> non-minter -> franchisor -> integer', async () => {
+    const token = await BookendSharedRoyaltyToken.new(5);
+    await token.mint(accountOne, tokenId);
+    await token.transferFrom(accountOne, accountTwo, tokenId, {
+      value: 10
+    });
+    await token.transferFrom(accountTwo, accountThree, tokenId, {
+      from: accountTwo,
+      value: 100
+    });
+    const event = await token.withdrawPayment(accountTwo, 4, tokenId);
+    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(5);
+  });
+
+  it('countTooBig -> non-minter -> franchisor -> non-integer', async () => {
+    const token = await BookendSharedRoyaltyToken.new(5);
+    await token.mint(accountOne, tokenId);
+    await token.transferFrom(accountOne, accountTwo, tokenId, {
+      value: 10
+    });
+    await token.transferFrom(accountTwo, accountThree, tokenId, {
+      from: accountTwo,
+      value: 101
+    });
+    const event = await token.withdrawPayment(accountTwo, 4, tokenId);
+    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(6);
+  });
+
+  it('countTooBig -> non-minter -> non-franchisor -> non-integer', async () => {
+    const token = await BookendSharedRoyaltyToken.new(5);
+    await token.mint(accountOne, tokenId);
+    await token.transferFrom(accountOne, accountTwo, tokenId, {
+      value: 10
+    });
+    await token.transferFrom(accountTwo, accountThree, tokenId, {
+      from: accountTwo,
+      value: 101
+    });
+    const event = await token.withdrawPayment(accountThree, 4, tokenId);
+    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(0);
+  });
+
+  it('countTooBig -> non-minter -> non-franchisor -> integer', async () => {
+    const token = await BookendSharedRoyaltyToken.new(5);
+    await token.mint(accountOne, tokenId);
+    await token.transferFrom(accountOne, accountTwo, tokenId, {
+      value: 10
+    });
+    await token.transferFrom(accountTwo, accountThree, tokenId, {
+      from: accountTwo,
+      value: 100
+    });
+    const event = await token.withdrawPayment(accountThree, 4, tokenId);
+    expect(parseInt(event.logs[0].args.weiAmount)).toEqual(0);
   });
 });
