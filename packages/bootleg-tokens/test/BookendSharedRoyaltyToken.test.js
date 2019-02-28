@@ -1,5 +1,4 @@
 const expect = require('jest-matchers');
-const sharedRoyaltyBehavoir = require('./sharedRoyaltyToken.behavoir');
 const BookendSharedRoyaltyToken = artifacts.require(
   'BookendSharedRoyaltyToken'
 );

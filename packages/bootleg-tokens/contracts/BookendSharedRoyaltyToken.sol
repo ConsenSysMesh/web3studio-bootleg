@@ -37,9 +37,6 @@ contract BookendSharedRoyaltyToken is AbstractSharedRoyaltyToken, ERC721Mintable
       if (token.franchisors[i - 1] == franchisor) {
         payment += (token.payments[i] * franchisorPercentage) % 100 == 0 ? (token.payments[i] * franchisorPercentage)/100  : (token.payments[i] * franchisorPercentage)/100 + 1;
       }
-      else{
-        payment += 0;
-      }
     }
 
     return payment;
