@@ -7,7 +7,6 @@
     "test": "test"
   },
   "scripts": {
-    "postinstall": "stack build",
     "integration-test": "sls offline start"
   },
   "author": "",
