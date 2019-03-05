@@ -8,7 +8,6 @@ main = apiGatewayMain handler
 
 handler :: APIGatewayProxyRequest (Embedded Value) -> IO (APIGatewayProxyResponse (Embedded [Int]))
 handler request = do
-  putStrLn "This should go to logs"
-  print $ request ^. requestBody
+  putStrLn "This is a placeholder Authorizer lambda"
   pure $ responseOK & responseBodyEmbedded ?~ [1,2,3]
 
