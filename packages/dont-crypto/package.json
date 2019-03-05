@@ -8,8 +8,7 @@
   },
   "scripts": {
     "postinstall": "stack build",
-    "integration-test": "sls offline start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "integration-test": "sls offline start"
   },
   "author": "",
   "license": "ISC",
