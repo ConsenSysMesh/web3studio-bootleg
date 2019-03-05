@@ -1,3 +1,6 @@
 .stack-work/
 node_modules/
 .serverless/
+dont-auth
+dont-crypto-exe
+dont-crypto.js
