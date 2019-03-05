@@ -1,0 +1,27 @@
+service: dont-crypto
+
+provider:
+  name: aws
+  runtime: haskell
+
+functions:
+  dont-crypto-func:
+    handler: dont-crypto.dont-crypto-exe
+    events:
+      - http:
+          path: init
+          method: get
+  dONT-auth:
+    handler: dont-crypto.dont-auth
+    # with a path of the form `dir1/.../dirn`, relative to `serverless.yml`,
+    # which points to the location where the Haskell package `mypackage` is
+    # defined. This prefix is not needed when the Stack project is defined at
+    # the same level as `serverless.yml`.
+
+plugins:
+  - serverless-haskell
+  - serverless-offline
+
+custom:
+  haskell:
+    docker: DOCKER
