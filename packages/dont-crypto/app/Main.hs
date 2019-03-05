@@ -1,19 +1,15 @@
 {-# LANGUAGE OverloadedStrings #-}
+import AWSLambda.Events.APIGateway
+import Control.Lens
+import Data.Aeson
+import Data.Aeson.Embedded
+main = apiGatewayMain handler
 
-
-import           AWSLambda.Events.APIGateway
-import           Control.Lens
-import qualified Data.HashMap.Strict         as HashMap
-import           Data.Semigroup
-import           Data.Text                   (Text)
-
-main :: IO ()
-main = apiGatewayMain hello
-
-hello :: APIGatewayProxyRequest Text -> IO (APIGatewayProxyResponse Text)
-hello request = do
+handler :: APIGatewayProxyRequest (Embedded Value) -> IO (APIGatewayProxyResponse (Embedded [Int]))
+handler request = do
   putStrLn "This should go to logs"
-  putStrLn "THIS IS HAPPENING"
-  case HashMap.lookup "name" (request ^. agprqPathParameters) of
-    Just name -> return $ responseOK & responseBody ?~ "Hello, " <> name
-    Nothing -> return responseNotFound
+  print $ request ^. requestBody
+  pure $ responseOK & responseBodyEmbedded ?~ [1,2,3]
+
+
+

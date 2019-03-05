@@ -9,11 +9,14 @@ functions:
     handler: dont-crypto.dont-crypto-exe
     events:
       - http:
-          path: init
+          path: getrejected
           method: get
           authorizer:
             name: dONT-auth
             type: request
+      - http:
+          path: getintarray
+          method: get
   dONT-auth:
     handler: dont-crypto.dont-auth
     # with a path of the form `dir1/.../dirn`, relative to `serverless.yml`,
