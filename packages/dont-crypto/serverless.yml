@@ -11,6 +11,9 @@ functions:
       - http:
           path: init
           method: get
+          authorizer:
+            name: dONT-auth
+            type: request
   dONT-auth:
     handler: dont-crypto.dont-auth
     # with a path of the form `dir1/.../dirn`, relative to `serverless.yml`,
