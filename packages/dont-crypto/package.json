@@ -1,0 +1,21 @@
+{
+  "name": "dont-crypto",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "integration-test": "sls offline start"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "serverless": "^1.33.2",
+    "serverless-haskell": "^0.8.4"
+  },
+  "devDependencies": {
+    "serverless-offline": "^4.7.1"
+  }
+}
