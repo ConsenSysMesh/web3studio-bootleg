@@ -41,6 +41,7 @@ packages:
 extra-deps:
   - serverless-haskell-0.8.5
   - amazonka-iam-policy-0.0.4@sha256:4f23c55a37987210248244069b7260981b79ae0d0222ba4aaf73fca712483878
+  - aws-easy-0.1.0.2@sha256:ef331eb24243567bff2a08401d327680d8d19cafe5c35c6cc588eceef9da46a1
 # Override default flag values for local packages and extra-deps
 # flags: {}
 
