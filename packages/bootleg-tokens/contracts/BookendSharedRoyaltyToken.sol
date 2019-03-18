@@ -30,7 +30,7 @@ contract BookendSharedRoyaltyToken is AbstractSharedRoyaltyToken, ERC721Mintable
     // guard for payments array
     maxCount = maxCount > token.payments.length ? token.payments.length : maxCount;
 
-    uint256 payment= 0;
+    uint256 payment = 0;
     // Calculating payments for beginning of bookend
     if (franchisor == _tokens[tokenId].franchisors[0]) {
       for (uint256 i = start; i < maxCount; i++) {
@@ -43,7 +43,7 @@ contract BookendSharedRoyaltyToken is AbstractSharedRoyaltyToken, ERC721Mintable
       if (token.franchisors[i - 1] == franchisor) {
         payment += (token.payments[i] * franchisorPercentage)/100;
         // check for rounding and round up
-        if ((token.payments[i] * franchisorPercentage) % 100 != 0){
+        if ((token.payments[i] * franchisorPercentage) % 100 != 0) {
           payment += 1;
         }
       }
