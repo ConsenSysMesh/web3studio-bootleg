@@ -23,26 +23,26 @@ contract BookendSharedRoyaltyToken is AbstractSharedRoyaltyToken, ERC721Mintable
    * @param count the number of payments left for this franchisor
    * @param tokenId - id of the token whose payment is being requested
   */
-  function paymentBalanceOf(address franchisor,uint256 start,uint256 count,uint256 tokenId) public view returns (uint256) {    
+  function paymentBalanceOf(address franchisor, uint256 start, uint256 count, uint256 tokenId) public view returns (uint256) {    
     Token storage token = _tokens[tokenId];
     uint256 maxCount = start + count;
 
-    // guard for payments array overrun
+    // guard for payments array
     maxCount = maxCount > token.payments.length ? token.payments.length : maxCount;
 
-    uint256 payment = 0;
-    // if we are getting payment balance for the first franchisor
-    // do this first because they get (100 - franchisorPercentage) amount
+    uint256 payment= 0;
+    // Calculating payments for beginning of bookend
     if (franchisor == _tokens[tokenId].franchisors[0]) {
       for (uint256 i = start; i < maxCount; i++) {
         payment += (token.payments[i] * (100 - franchisorPercentage))/100;
       }
     } 
-    // For everyone
+
+    // Calculating payments for end of bookend
     for (uint256 i = start; i < maxCount; i++) {
       if (token.franchisors[i - 1] == franchisor) {
         payment += (token.payments[i] * franchisorPercentage)/100;
-        // If the ??? modulo 100 ???
+        // check for rounding and round up
         if ((token.payments[i] * franchisorPercentage) % 100 != 0){
           payment += 1;
         }
@@ -50,5 +50,5 @@ contract BookendSharedRoyaltyToken is AbstractSharedRoyaltyToken, ERC721Mintable
     }
 
     return payment;
-  }
+  } 
 }
