@@ -29,6 +29,7 @@ contract('BookendSharedRoyaltyToken', accounts => {
     const balance = await token.paymentBalanceOf(accountOne, 1, 1, tokenId);
     expect(parseInt(balance)).toEqual(7);
   });
+
   it('count -> minter -> non franchisor -> non-integer', async () => {
     const token = await BookendSharedRoyaltyToken.new(5);
     await token.mint(accountOne, tokenId);

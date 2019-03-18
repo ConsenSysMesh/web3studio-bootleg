@@ -26,16 +26,26 @@ contract BookendSharedRoyaltyToken is AbstractSharedRoyaltyToken, ERC721Mintable
   function paymentBalanceOf(address franchisor,uint256 start,uint256 count,uint256 tokenId) public view returns (uint256) {    
     Token storage token = _tokens[tokenId];
     uint256 maxCount = start + count;
+
+    // guard for payments array overrun
     maxCount = maxCount > token.payments.length ? token.payments.length : maxCount;
+
     uint256 payment = 0;
+    // if we are getting payment balance for the first franchisor
+    // do this first because they get (100 - franchisorPercentage) amount
     if (franchisor == _tokens[tokenId].franchisors[0]) {
-      for (uint256 i = start; i<maxCount; i++) {
-        payment = payment + (token.payments[i] * (100 - franchisorPercentage))/100;
+      for (uint256 i = start; i < maxCount; i++) {
+        payment += (token.payments[i] * (100 - franchisorPercentage))/100;
       }
     } 
-    for (uint256 i = start; i < maxCount; i += 1) {
+    // For everyone
+    for (uint256 i = start; i < maxCount; i++) {
       if (token.franchisors[i - 1] == franchisor) {
-        payment += (token.payments[i] * franchisorPercentage) % 100 == 0 ? (token.payments[i] * franchisorPercentage)/100  : (token.payments[i] * franchisorPercentage)/100 + 1;
+        payment += (token.payments[i] * franchisorPercentage)/100;
+        // If the ??? modulo 100 ???
+        if ((token.payments[i] * franchisorPercentage) % 100 != 0){
+          payment += 1;
+        }
       }
     }
 
