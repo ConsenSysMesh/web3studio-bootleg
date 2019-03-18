@@ -1,5 +1,5 @@
 const BootlegToken = artifacts.require('BootlegToken');
-const sharedRoyaltyBehavoir = require('bootleg-tokens/test/sharedRoyaltyToken.behavoir');
+const sharedRoyaltyBehavior = require('bootleg-tokens/test/sharedRoyaltyToken.behavior');
 const utilFactory = require('bootleg-tokens/test/erc721UtilFactory');
 
 contract('BootlegToken', accounts => {
@@ -17,7 +17,7 @@ contract('BootlegToken', accounts => {
    */
   const mintToken = async () => {
     const id = web3.utils.asciiToHex('super awesome token id');
-    const instance = await BootlegToken.new('Bootleg', 'BLEG');
+    const instance = await BootlegToken.new('Bootleg', 'BLEG', 5);
 
     await instance.mintWithTokenURI(
       accounts[0],
@@ -28,7 +28,7 @@ contract('BootlegToken', accounts => {
     return { token: instance, tokenId: id };
   };
 
-  sharedRoyaltyBehavoir(mintToken, accounts);
+  sharedRoyaltyBehavior(mintToken, accounts);
 
   beforeEach(async () => {
     const result = await mintToken();

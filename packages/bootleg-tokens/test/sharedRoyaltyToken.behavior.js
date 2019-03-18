@@ -146,6 +146,7 @@ module.exports = (mintToken, accounts) => {
         value: oneEthInWei
       });
 
+      await util.tokenPaymentBalance(accounts[1]);
       await token.transferFrom(accounts[0], accounts[3], tokenId, {
         from: accounts[0],
         value: oneEthInWei
@@ -153,7 +154,16 @@ module.exports = (mintToken, accounts) => {
 
       expect(await util.franchisorWithdrawPaymentsLeft(accounts[0])).toEqual(4);
       expect(await util.tokenPaymentBalance(accounts[0])).toEqual(
-        web3.utils.toWei('2', 'ether')
+        web3.utils.toWei('3.9', 'ether')
+      );
+      expect(await util.tokenPaymentBalance(accounts[1])).toEqual(
+        web3.utils.toWei('.05', 'ether')
+      );
+      expect(await util.tokenPaymentBalance(accounts[2])).toEqual(
+        web3.utils.toWei('.05', 'ether')
+      );
+      expect(await util.tokenPaymentBalance(accounts[3])).toEqual(
+        web3.utils.toWei('0', 'ether')
       );
     });
   });

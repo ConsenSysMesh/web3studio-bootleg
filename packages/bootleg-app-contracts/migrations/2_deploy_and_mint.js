@@ -5,7 +5,7 @@ module.exports = async deployer => {
 
   const accounts = await web3.eth.getAccounts();
 
-  await deployer.deploy(BootlegToken, 'Bootleg', 'BLEG');
+  await deployer.deploy(BootlegToken, 'Bootleg', 'BLEG', 20);
 
   const token = await BootlegToken.deployed();
 
