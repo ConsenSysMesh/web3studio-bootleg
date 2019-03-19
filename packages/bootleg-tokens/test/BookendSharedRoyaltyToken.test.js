@@ -1,7 +1,6 @@
 const expect = require('jest-matchers');
-const BookendSharedRoyaltyToken = artifacts.require(
-  'BookendSharedRoyaltyToken'
-);
+const sharedRoyaltyBehavior = require('./sharedRoyaltyToken.behavior');
+const BookendSharedRoyaltyToken = artifacts.require('TestSharedRoyaltyToken');
 
 contract('BookendSharedRoyaltyToken', accounts => {
   const accountOne = accounts[0];
@@ -12,9 +11,22 @@ contract('BookendSharedRoyaltyToken', accounts => {
   let token;
   let balance;
 
-  beforeEach(async () => {
+  /**
+   * Mints a Bootleg token
+   *
+   * @returns {Promise<{TestSharedRoyaltyToken}>} - A SharedRoyalty Token instance
+   */
+  const mintToken = async () => {
     token = await BookendSharedRoyaltyToken.new(5);
     await token.mint(accountOne, tokenId);
+
+    return { token, tokenId };
+  };
+
+  sharedRoyaltyBehavior(mintToken, accounts);
+
+  beforeEach(async () => {
+    await mintToken();
   });
 
   describe('the first transfer', async () => {
