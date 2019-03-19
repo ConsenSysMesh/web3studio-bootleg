@@ -15,7 +15,7 @@ functions:
             name: dONT-auth
             type: request
       - http:
-          path: getintarray
+          path: getstuff
           method: get
   dONT-auth:
     handler: dont-crypto.dont-auth
