@@ -56,23 +56,16 @@ printTables region secure host port = do
 
 insertItem :: Region
               -- ^ Region to operate in.
-           -> Bool
-              -- ^ Whether to use HTTPS (ie. SSL).
-           -> ByteString
-              -- ^ The hostname to connect to.
-           -> Int
-              -- ^ The port number to connect to.
            -> Text
               -- ^ The table to insert the item into.
            -> HashMap Text AttributeValue
               -- ^ The attribute name-value pairs that constitute an item.
            -> IO PutItemResponse
-insertItem region secure host port table item = do
+insertItem region table item = do
     lgr <- newLogger Debug stdout
     env <- newEnv Discover <&> set envLogger lgr
 
     -- Specify a custom DynamoDB endpoint to communicate with:
-    let dynamo = setEndpoint secure host port dynamoDB
 
     runResourceT . runAWST env . within region $ do
         -- Scoping the endpoint change using 'reconfigure':
@@ -87,4 +80,33 @@ insertItem region secure host port table item = do
 
 say :: MonadIO m => Text -> m ()
 say = liftIO . Text.putStrLn
+
+
+getItem :: Region
+              -- ^ Region to operate in.
+           -> Text
+              -- ^ The table to insert the item into.
+           -> Text
+              -- ^ The attributes to return
+           -> HashMap Text AttributeValue
+              -- ^ 
+           -> IO GetItemResponse
+getItem region table attributes key= do
+    lgr <- newLogger Debug stdout
+    env <- newEnv Discover <&> set envLogger lgr
+
+    -- Specify a custom DynamoDB endpoint to communicate with:
+
+    runResourceT . runAWST env . within region $ do
+        -- Scoping the endpoint change using 'reconfigure':
+
+      say $ "Getting item from table"
+         <> table
+         <> "' with attribute names: "
+         <> attributes
+      -- Insert the new item into the specified table:
+      let item = Network.AWS.DynamoDB.getItem table & giProjectionExpression ?~ attributes
+      send $ item & giKey .~ key
+
+
 
