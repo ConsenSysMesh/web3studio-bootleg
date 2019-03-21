@@ -28,6 +28,20 @@ Decrypt a file
 
 Output will print the contents of the file. This will need to be changed for large files/binaries/etc...
 
+## Need help?
+
+`./media-encrypt.rb -h` works or just run the script with no arguments
+
+```bash
+$ ./media-encrypt.rb -h
+Usage ./media-encrypt.rb [options]
+Uploads/downloads files with AWS clientside encryption
+    -e, --encrypt=FILEPATH           Encrypt and upload the file at the provided file path
+    -d, --decrypt=S3PATH             Download and decrypt the file at the provided S3 path
+    -b, --bucket=BUCKET              (optional) Bucket name for s3
+    -k, --aes-key=AES_KEY            (optional) The AES encryption key to use
+```
+
 ### Examples
 
 Encrypting a file...
