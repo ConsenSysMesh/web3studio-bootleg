@@ -7,10 +7,10 @@ Bundler - The Gemfile holds the list of gems needed to run this project. Run `ge
 
 ## Installing
 
-`brew install rbenv` - Run this to install rbenv with homebrew
-`rbenv install` - From the project directory `packages/aws-cli-encrypt`, run this to install the correct version of Ruby
-`gem install bundler` - Install bundler gem in your Ruby
-`bundle install` - Install the project's required gems
+1. `brew install rbenv` - Run this to install rbenv with homebrew
+1. `rbenv install` - From the project directory `packages/aws-cli-encrypt`, run this to install the correct version of Ruby
+1. `gem install bundler` - Install bundler gem in your Ruby
+1. `bundle install` - Install the project's required gems
 
 ## Setup
 
