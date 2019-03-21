@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "test": "yarn lint && yarn test:packages",
+    "test": "yarn lint && yarn test:packages && yarn bootleg-clean-tree",
     "test:packages": "lerna run test --concurrency 1",
     "lint": "yarn eslint . && yarn solium -d .",
     "prettier": "prettier \"**/*.{js,json,css,md}\" --write",

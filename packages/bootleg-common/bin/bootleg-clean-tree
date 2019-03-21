@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+const checkWorkingTree = require('@lerna/check-working-tree');
+
+const options = {
+  cwd: process.cwd()
+};
+
+(async () => {
+  try {
+    await checkWorkingTree(options);
+  } catch (err) {
+    console.error(err.message);
+    console.error(
+      'On Travis, this is likely because yarn is updating `yarn.lock` during tests. Run `yarn install` and re-commit.'
+    );
+
+    process.exit(1);
+  }
+})();
