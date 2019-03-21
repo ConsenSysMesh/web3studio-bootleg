@@ -14,9 +14,10 @@
     "url": "https://github.com/barlock/web3studio-bootleg/issues"
   },
   "bin": {
-    "bootleg-truffle-test": "./bin/bootleg-truffle-test",
+    "bootleg-clean-tree": "./bin/bootleg-clean-tree",
+    "bootleg-coverage-ignore": "./bin/bootleg-coverage-ignore",
     "bootleg-setup-ganache": "./bin/bootleg-setup-ganache",
-    "bootleg-coverage-ignore": "./bin/bootleg-coverage-ignore"
+    "bootleg-truffle-test": "./bin/bootleg-truffle-test"
   },
   "dependencies": {
     "cosmiconfig": "^5.1.0",
