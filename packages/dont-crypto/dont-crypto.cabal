@@ -25,9 +25,10 @@ source-repository head
   type: git
   location: https://github.com/githubuser/dont-crypto
 
+
 library
   exposed-modules:
-      DontDynamoDB
+      AuthorizerIAMPolicy, DontDynamoDB
   other-modules:
       Paths_dont_crypto
   hs-source-dirs:
@@ -40,6 +41,7 @@ library
     , hashmap
     , text
     , amazonka-dynamodb
+    , amazonka-iam-policy
     , amazonka
     , aeson
     , base >=4.7 && <5
@@ -85,6 +87,7 @@ executable dont-auth
     , aeson
     , base >=4.7 && <5
     , dont-crypto
+    , amazonka-iam-policy
     , serverless-haskell
   default-language: Haskell2010
 

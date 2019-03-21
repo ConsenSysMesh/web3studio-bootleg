@@ -19,7 +19,10 @@ functions:
           method: get
   dONT-auth:
     handler: dont-crypto.dont-auth
-    # with a path of the form `dir1/.../dirn`, relative to `serverless.yml`,
+    events:
+      - http:
+          path: getauth
+          method: get # with a path of the form `dir1/.../dirn`, relative to `serverless.yml`,
     # which points to the location where the Haskell package `mypackage` is
     # defined. This prefix is not needed when the Stack project is defined at
     # the same level as `serverless.yml`.

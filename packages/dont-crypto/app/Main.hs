@@ -24,7 +24,6 @@ main = apiGatewayMain handler
 --function that gets queue url
 handler :: APIGatewayProxyRequest (Embedded Value) -> IO (APIGatewayProxyResponse (Embedded (HashMap Text AttributeValue)))
 handler request = do
-  print $ request ^. requestBody
   let key = attributeValue & avS ?~ "5"
   let attr = attributeValue & avS ?~ (pack "hello")
   insertItem Ohio (pack "Dont") (Map.fromList [((pack "id"), key),((pack "attr1"), attr)])
