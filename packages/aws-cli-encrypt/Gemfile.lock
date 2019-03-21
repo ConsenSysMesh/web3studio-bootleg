@@ -704,12 +704,16 @@ GEM
     aws-sigv4 (1.1.0)
       aws-eventstream (~> 1.0, >= 1.0.2)
     jmespath (1.4.0)
+    unicode-display_width (1.5.0)
+    whirly (0.2.6)
+      unicode-display_width (~> 1.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   aws-sdk (~> 3)
+  whirly
 
 BUNDLED WITH
    2.0.1
