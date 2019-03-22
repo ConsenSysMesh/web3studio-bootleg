@@ -40,5 +40,5 @@ handler request = do
   let methodArn = getString $ getPropFromObj request "methodArn"
   let policy =   fromMaybe HashMap.empty $ decode (encode (enableAccess accountId methodArn)) :: HashMap Text Value
   let authorizer = insert "principalId" "boss" policy
-  pure $  responseOK & responseBody ?~ (LBS.toString $ encode (Object authorizer))
+  pure $  responseOK & responseBody ?~ (LBS.toStrict $ encode (Object authorizer))
 
