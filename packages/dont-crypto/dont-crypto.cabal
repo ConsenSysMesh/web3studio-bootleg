@@ -89,6 +89,9 @@ executable dont-auth
     , dont-crypto
     , amazonka-iam-policy
     , serverless-haskell
+    , unordered-containers
+    , amazonka
+    , amazonka-core
   default-language: Haskell2010
 
 test-suite dont-crypto-test

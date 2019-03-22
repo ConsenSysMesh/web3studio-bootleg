@@ -17,9 +17,7 @@ theAction =  Policy.some [Policy.Action (pack "execute-api:invoke")]
 theResource :: Text -> Policy.Block [Policy.Resource]
 theResource methodArn = Policy.some [Policy.Resource (methodArn)]
 
-principalId :: Text -> Maybe (Policy.Block Policy.Principal)
-principalId accountId = Just $ Policy.some (Policy.AWS (pure $ accountId))
 
 enableAccess :: Text -> Text -> Policy.Policy Policy.Statement
-enableAccess accountId  methodArn= Policy.document $ pure Policy.allow {Policy.principal = principalId $ accountId , Policy.action = theAction,  Policy.resource = theResource $ methodArn}  
+enableAccess accountId  methodArn= Policy.document $ pure Policy.allow { Policy.action = theAction,  Policy.resource = theResource $ methodArn}  
 
