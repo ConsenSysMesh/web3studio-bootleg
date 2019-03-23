@@ -1,5 +1,5 @@
 const TestSharedRoyaltyToken = artifacts.require('TestSharedRoyaltyToken');
-const sharedRoyaltyBehavoir = require('./sharedRoyaltyToken.behavoir');
+const sharedRoyaltyBehavior = require('./sharedRoyaltyToken.behavior');
 
 contract('AbstractSharedRoyaltyToken', accounts => {
   /**
@@ -9,12 +9,12 @@ contract('AbstractSharedRoyaltyToken', accounts => {
    */
   const mintToken = async () => {
     const id = web3.utils.asciiToHex('super awesome token id');
-    const instance = await TestSharedRoyaltyToken.new();
+    const instance = await TestSharedRoyaltyToken.new(5);
 
     await instance.mint(accounts[0], id);
 
     return { token: instance, tokenId: id };
   };
 
-  sharedRoyaltyBehavoir(mintToken, accounts);
+  sharedRoyaltyBehavior(mintToken, accounts);
 });

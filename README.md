@@ -22,12 +22,12 @@ the latest project from the [Consensys Web3Studio](https://consensys.net/web3stu
 We are beginning development on this exciting new idea and you can follow the
 latest updates here through GitHub. Please join the discussion, create issues, and get involved!
 
-Read more about the project in the latest article about Bootleg on [Medium](https://link.medium.com/ZgnzmtPMrT)
+Check out the Bootleg [developer kit](https://consensys.net/web3studio/bootleg), and read more about the project in the latest article about Bootleg on [Medium](https://link.medium.com/ZgnzmtPMrT)
 
 
 ## Project overview
 
-This repo holds the code and development assets for the Bootleg SDK. The repo and many of the high level concepts in this project all pay homage to the original article about the idea published on Medium (link above). Whenever possible we have attempted to use more generic terms in our code and domain models so that as much code from this repo can be re-used, shared, re-purposed by anyone. We have done our best but it is a tradeoff between making something we feel embodies the spirit of the idea and speculating about would/would not be useful should someone decided to take our code and run with it.
+This repo holds the code and development assets for the Bootleg SDK. The repo and many of the high level concepts in this project all pay homage to the original article about the idea published on [Medium](https://link.medium.com/ZgnzmtPMrT). Whenever possible we have attempted to use more generic terms in our code and domain models so that as much code from this repo can be re-used, shared, re-purposed by anyone. We have done our best but it is a tradeoff between making something we feel embodies the spirit of the idea and speculating about what would be useful for someone using the work to build their own idea.
 
 ## Packages
 
@@ -35,7 +35,7 @@ This is a monorepo that contains the projects that make bootleg rock 🎸. You c
 the code for all of them in in the [`packages`](packages) folder.
 
 You'll notice two prefixes. `bootleg` projects are directly related to the fictional
-bootleg app, or the smart contracts it uses. `helix` projects are related to a system to
+bootleg app, or the smart contracts it uses. `dONT` projects are related to a system to
 create non-transferable digital native assets, basically blockchain DRM.
 
 ### [`bootleg-tokens`](packages/bootleg-tokens)
@@ -48,14 +48,10 @@ would want to look if you want to use our pay-it-backwards tokens in your dApp.
 Here lies the smart contracts used by our fictional app. It's a great reference
 implementation for your Bootleg-esk dApp.
 
-### [`helix-crypto`](packages/helix-crypto)
+### [`dont-crypto`](packages/dont-crypto)
 
 Where the rubber hits the road. A phenomenal library to encrypt and then cryptographically
 watermark an asset to allow copyright holders to find who leaked their content.
-
-### [`helix-contracts`](packages/helix-contracts)
-
-Reference contracts that the Helix system uses to make everything as trust-less as possible.
 
 ### [`examples`](packages/examples)
 
