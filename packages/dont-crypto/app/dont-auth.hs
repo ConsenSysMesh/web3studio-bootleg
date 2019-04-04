@@ -13,6 +13,7 @@ import Data.Aeson.Embedded
 import Data.HashMap.Strict as HashMap
 import Data.Text 
 import AuthorizerIAMPolicy
+import CryptolScript
 import qualified Amazonka.IAM.Policy as Policy
 
 
@@ -27,11 +28,19 @@ getHashMap (Object hashMap) = hashMap
 aesonObjectLookup :: Aeson.Value -> Text -> Aeson.Value 
 aesonObjectLookup obj key = fromMaybe (String "") $  HashMap.lookup key (getHashMap obj)
 
+buildFinalPolicy :: Aeson.Value -> (Either Bool String) -> Aeson.Value
+buildFinalPolicy request decision  
+  |decision == Left True = Object $ HashMap.fromList [("principalId",String "boss"),("policyDocument",(toJSON $ enableAccess accountId methodArn))]
+  |otherwise = String $ "Don't Allow"
+  where
+  requestContext= aesonObjectLookup request "requestContext"
+  accountId = getString $ aesonObjectLookup requestContext "accountId"
+  methodArn = getString $ aesonObjectLookup request "methodArn"  
+
+getCryptolOutput = checkCryptolOutput "cryptol/inflist.cry" "t3"
+
 
 handler :: Aeson.Value -> IO (Aeson.Value)
 handler request = do
-  let requestContext= aesonObjectLookup request "requestContext"
-  let accountId = getString $ aesonObjectLookup requestContext "accountId"
-  let methodArn = getString $ aesonObjectLookup request "methodArn"  
-  pure $ Object $ HashMap.fromList [("principalId",String "boss"),("policyDocument",(toJSON $ enableAccess accountId methodArn))]
-
+  cryptolOutput <- getCryptolOutput
+  pure $ (buildFinalPolicy request (cryptolOutput))
