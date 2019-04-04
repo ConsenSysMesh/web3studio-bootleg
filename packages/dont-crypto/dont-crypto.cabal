@@ -28,7 +28,7 @@ source-repository head
 
 library
   exposed-modules:
-      AuthorizerIAMPolicy, DontDynamoDB
+      AuthorizerIAMPolicy, DontDynamoDB, CryptolScript
   other-modules:
       Paths_dont_crypto
   hs-source-dirs:
@@ -46,6 +46,7 @@ library
     , aeson
     , base >=4.7 && <5
     , serverless-haskell
+    , process
   default-language: Haskell2010
 
 executable dont-crypto-exe
@@ -92,6 +93,7 @@ executable dont-auth
     , unordered-containers
     , amazonka
     , amazonka-core
+    
   default-language: Haskell2010
 
 test-suite dont-crypto-test
