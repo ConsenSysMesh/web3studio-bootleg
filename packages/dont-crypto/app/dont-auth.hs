@@ -37,10 +37,10 @@ buildFinalPolicy request decision
   accountId = getString $ aesonObjectLookup requestContext "accountId"
   methodArn = getString $ aesonObjectLookup request "methodArn"  
 
-getCryptolOutput = checkCryptolOutput "cryptol/inflist.cry" "t3"
+getCryptolOutput = checkCryptolOutput "cryptol/scripts/inflist.cry" "t3"
 
 
 handler :: Aeson.Value -> IO (Aeson.Value)
 handler request = do
   cryptolOutput <- getCryptolOutput
-  pure $ (buildFinalPolicy request (cryptolOutput))
+  pure $ (buildFinalPolicy request cryptolOutput)
