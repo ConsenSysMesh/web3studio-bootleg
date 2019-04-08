@@ -34,7 +34,8 @@ library
   hs-source-dirs:
       src
   build-depends:
-      lens
+      unix
+    , lens
     , unordered-containers
     , bytestring
     , conduit

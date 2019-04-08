@@ -4,6 +4,7 @@ module CryptolScript where
 import System.Environment
 import System.Process
 import System.IO as IO
+import Data.Maybe
 
 stringToBool x = case x of "True" -> Left True
                            "False" -> Left False
@@ -12,14 +13,33 @@ stringToBool x = case x of "True" -> Left True
 parseCryptolBoolOutput :: String -> Either Bool String
 parseCryptolBoolOutput output = stringToBool $ last $ words $ last $ init $ lines output
 
+
+addToPath dir = do
+  currentPath <- getEnv "PATH"
+  setEnv "PATH" (concat [currentPath, ":", dir])
+  createProcess (proc "printenv" []) 
+  return ()
+
+copyLibs = do
+         (_,_, _, ph) <- createProcess (proc "cp"  ["cryptol/dependencies/libgomp.so.1","/lib64/libgomp.so.1"])         
+                     { std_out = Inherit
+                     , std_in  = Inherit
+                     , std_err = CreatePipe
+                     }
+         exitCode <- waitForProcess ph
+         return ()
+
 runCryptol hout file prop = do
-         (hin,_, herr , ph) <- createProcess_ "" (proc "cryptol"  [file])
+         addToPath "cryptol/z3/bin"
+         addToPath "cryptol/cryptol/bin"
+         copyLibs
+         setEnv "HOME" "/root"
+         (Just hin,_, herr , ph) <- createProcess (proc "cryptol"  [file])         
                      { std_out = UseHandle hout
                      , std_in  = CreatePipe
                      , std_err = CreatePipe
                      }
-         let undoMaybe (Just x) = x
-         hPutStrLn (undoMaybe hin) prop
+         hPutStrLn hin prop
          exitCode <- waitForProcess ph
          return ()
 
@@ -30,4 +50,4 @@ checkCryptolOutput file prop = do
          out <- readFile resultOut
          pure $ parseCryptolBoolOutput $ out
          where
-         resultOut = "resultOut.stdout"
+         resultOut = "/tmp/resultOut.stdout"
