@@ -19,6 +19,7 @@
     "url": "https://github.com/ConsenSys/web3studio-bootleg/issues"
   },
   "dependencies": {
-    "bootleg-tokens": "^1.0.0"
+    "bootleg-tokens": "^1.0.0",
+    "openzeppelin-solidity": "^2.1.2"
   }
 }
