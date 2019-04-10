@@ -39,7 +39,7 @@ contract('BootlegTraderApp', accounts => {
       expect(errorMsg).toMatch(/must have non-zero price/i);
     });
   });
-  1;
+
   describe('purchasing a token for the asking price', async () => {
     beforeEach(async () => {
       await app.setTokenPrice(tokenId, oneEthInWei);
