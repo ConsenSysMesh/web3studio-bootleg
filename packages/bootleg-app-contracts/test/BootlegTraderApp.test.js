@@ -9,6 +9,7 @@ contract('BootlegTraderApp', accounts => {
   const mockURI = 'https://ipfs.infura.io/ipfs/QmSomeHash';
   const firstOwner = accounts[0];
   const secondOwner = accounts[1];
+  const thirdOwner = accounts[2];
   const notAnOwner = accounts[9];
   const oneEthInWei = web3.utils.toWei('1', 'ether');
   const twoEthInWei = web3.utils.toWei('2', 'ether');
@@ -18,6 +19,7 @@ contract('BootlegTraderApp', accounts => {
     app = await BootlegTraderApp.new(tokenContract.address);
     await tokenContract.mintWithTokenURI(firstOwner, tokenId, mockURI);
     await tokenContract.approve(app.address, tokenId);
+    await tokenContract.setAp
   });
 
   describe('with a zero price', async () => {
@@ -48,7 +50,7 @@ contract('BootlegTraderApp', accounts => {
       });
     });
 
-    it('then has a new owner', async () => {
+    it('is owned by the second owner', async () => {
       expect(await tokenContract.ownerOf(tokenId)).toEqual(secondOwner);
     });
 
@@ -59,6 +61,18 @@ contract('BootlegTraderApp', accounts => {
 
     it('emits a Purchase event', async () => {
       expect(result.logs[0]['event']).toEqual('Purchased');
+    });
+
+    describe('purchasing again by someone else', async () => {
+      beforeEach(async () => {
+        result = await app.purchase(tokenId, thirdOwner, {
+          value: oneEthInWei
+        });
+      });
+
+      it('is owned by the third owner', async () => {
+        expect(await tokenContract.ownerOf(tokenId)).toEqual(secondOwner);
+      });
     });
   });
 
