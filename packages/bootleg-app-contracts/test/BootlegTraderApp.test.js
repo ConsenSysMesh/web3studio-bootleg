@@ -19,7 +19,7 @@ contract('BootlegTraderApp', accounts => {
     app = await BootlegTraderApp.new(tokenContract.address);
     await tokenContract.mintWithTokenURI(firstOwner, tokenId, mockURI);
     await tokenContract.approve(app.address, tokenId);
-    await tokenContract.setAp
+    await tokenContract.setAp;
   });
 
   describe('with a zero price', async () => {
