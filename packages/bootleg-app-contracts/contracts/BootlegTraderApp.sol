@@ -3,62 +3,94 @@ pragma solidity ^0.5.0;
 import "./BootlegToken.sol";
 
 contract BootlegTraderApp {
-
+  
+  // The bootleg token contract
   BootlegToken public bootlegToken;
-  mapping(uint256 => uint256) private _tokenPrices;
+  // Only trading one token for this dApp, this is the ID for the token
+  uint256 public tokenToTrade;
+  // Only one token traded only requires one price to store
+  uint256 public tokenPrice;
   
   event Purchased(address newOwner, uint256 tokenPrice);
   event PriceChanged(address changer, uint256 oldPrice, uint256 newPrice);
+  event PaymentWithdrawn(address withdrawer);
 
   /**
    * @notice Create a new Bootleg Token trading app
    *
-   * @param deployedAddress - Deployed address of the BootlegToken contract 
+   * @param deployedAddress address Deployed address of the BootlegToken contract 
+   * @param tokenId uint256 TokenID to trade with this app 
    */
-  constructor (address deployedAddress) public {
+  constructor (address deployedAddress, uint256 tokenId) public {
     bootlegToken = BootlegToken(deployedAddress);
+    tokenToTrade = tokenId;
   }
 
   /**
-  * @notice Provides a way to become a franchisor a Bootleg token for a fee.
-  * Emits a Purchased event. 
-  * @param tokenId - uint256 The token Id to purchase
-  * @param newOwner - address The address of the new owner/franchisor
+  * @notice Provides a way to become a franchisor a Bootleg token for a fee
+  * Emits a Purchased event
   */
-  function purchase(uint256 tokenId, address newOwner) public payable {
-    uint256 tokenPrice = _tokenPrices[tokenId];
-
+  function purchase() public payable {
     require(tokenPrice > 0, "Token must have non-zero price before it can be franchised");
     require(msg.value == tokenPrice, "Must provide eth to franchise the token");
 
-    //bootlegToken.addFranchisor.value(msg.sender).(newOwner, tokenId);
-    address owner = bootlegToken.ownerOf(tokenId);
-    bootlegToken.safeTransferFrom.value(msg.value)(owner, newOwner, tokenId, "");
+    address newOwner = msg.sender;
+    address owner = bootlegToken.ownerOf(tokenToTrade);
+    // Do the token transfer
+    bootlegToken.safeTransferFrom.value(msg.value)(owner, newOwner, tokenToTrade, "");
+    // set the price to zero to prevent purchase
+    setTokenPrice(0);
 
     emit Purchased(newOwner, tokenPrice);
   }
 
   /**
   * @notice Gets the token price given a tokenId
-  * @param tokenId - uint256 The token Id to query for price
-  * @return uint256 - the token price in Wei
+  * @return uint256 the token price in Wei
    */
-  function getTokenPrice(uint256 tokenId) public view returns (uint256) {
-    return _tokenPrices[tokenId];
+  function getTokenPrice() public view returns (uint256) {
+    return tokenPrice;
   }
 
   /**
   * @notice Sets the token price given a tokenId
   * Emits a PriceChanged event
-  * @param tokenId - uint256 The token Id to set the price
-  * @param newPrice - uint256 The new token price in Wei
+  * @param newPrice uint256 The new token price in Wei
    */
-  function setTokenPrice(uint256 tokenId, uint256 newPrice) public {
-    address currentOwner = bootlegToken.ownerOf(tokenId);
+  function setTokenPrice(uint256 newPrice) public {
+    address currentOwner = bootlegToken.ownerOf(tokenToTrade);
+    // TODO: Or allow minter to do this
     require(msg.sender == currentOwner, "Only the owner can change the token price");
-    uint256 oldPrice = _tokenPrices[tokenId];
-    _tokenPrices[tokenId] = newPrice;
+    uint256 oldPrice = tokenPrice;
+    tokenPrice = newPrice;
 
     emit PriceChanged(msg.sender, oldPrice, newPrice);
+  }
+
+  /**
+  * @notice Gets current token owner
+  * @return address Address of current owner
+  */
+  function getOwner() public view returns (address) {
+    return bootlegToken.ownerOf(tokenToTrade);
+  }
+
+  /**
+  * @notice Gets current payment balance of your token payments
+  * @return uint256 Payment balance in wei
+  */
+  function getBalance() public view returns (uint256) {
+    return bootlegToken.paymentBalanceOf(msg.sender, tokenToTrade);
+  }
+
+  /**
+  * @notice Use to widthraws eth from the payments you recieved during franchising
+  * Emits a PaymentWithdrawn event
+  * @dev Calls the withdrawPayment function on the BootlegToken 
+  */
+  function withdraw() public {
+    bootlegToken.withdrawPayment(msg.sender, tokenToTrade);
+
+    emit PaymentWithdrawn(msg.sender);
   }
 }

@@ -5,24 +5,30 @@ module.exports = async (deployer, network, accounts) => {
   let firstOwner = web3.utils.toHex(0);
   const metaDataURI = 'https://ipfs.infura.io/ipfs/QmSomeHash';
 
-  // TOKEN NUMERO UNO!!!
+  // Bootleg Token ID
   const tokenId = web3.utils.toBN(1);
+  // should be the Band
+  firstOwner = accounts[0];
+  // should be the Bootlegger
+  secondOwner = accounts[1];
 
-  if (network == 'rinkeby') {
-    firstOwner = '0x61D87e60B3893801DbC9056c10bc124251Ea7980';
-  } else {
-    firstOwner = accounts[0];
-  }
   // Deploy our BootlegToken
-  await deployer.deploy(BootlegToken, 'Bootleg', 'BLEG', 20);
+  await deployer.deploy(BootlegToken, 'Bootleg', 'BLEG', 25);
   const token = await BootlegToken.deployed();
 
-  await deployer.deploy(BootlegTraderApp, token.address);
+  // Deploy the trader app and pass in the token contract
+  await deployer.deploy(BootlegTraderApp, token.address, tokenId);
   const app = await BootlegTraderApp.deployed();
+
+  // Set the token to have the app as the only trader
+  await token.setTraderApp(app.address);
 
   // Do the minting
   await token.mintWithTokenURI(firstOwner, tokenId, metaDataURI);
 
+  // Add franchisor
+  await token.addFranchisor(secondOwner, tokenId);
+
   // Set this token up to be traded by the app contract
-  await token.approve(app.address, tokenId);
+  await token.setTraderApp(app.address);
 };
