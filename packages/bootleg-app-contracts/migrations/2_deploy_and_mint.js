@@ -2,7 +2,7 @@ const BootlegToken = artifacts.require('BootlegToken');
 const BootlegTraderApp = artifacts.require('BootlegTraderApp');
 
 module.exports = async (deployer, network, accounts) => {
-  let firstOwner = web3.utils.toHex(0);
+  let firstOwner = process.env.BAND_ADDRESS || web3.utils.toHex(0);
   const metaDataURI = 'https://ipfs.infura.io/ipfs/QmSomeHash';
 
   // Bootleg Token ID
