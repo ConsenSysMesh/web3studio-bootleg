@@ -8,7 +8,7 @@ module.exports = async (deployer, network, accounts) => {
   // Bootleg Token ID
   const tokenId = web3.utils.toBN(1);
   // should be the Band
-  firstOwner = accounts[0];
+  const firstOwner = process.env.BAND_ADDRESS || accounts[0];
   // should be the Bootlegger
   secondOwner = accounts[1];
 
