@@ -11,8 +11,8 @@ contract BootlegTraderApp {
   // Only one token traded only requires one price to store
   uint256 public tokenPrice;
   
-  event Purchased(address newOwner, uint256 tokenPrice);
-  event PriceChanged(address changer, uint256 oldPrice, uint256 newPrice);
+  event Purchased(address newOwner, uint256 weiAmount);
+  event PriceChanged(address changer, uint256 oldPriceInWei, uint256 newPriceInWei);
   event PaymentWithdrawn(address withdrawer);
 
   /**

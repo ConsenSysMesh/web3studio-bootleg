@@ -25,6 +25,8 @@ contract('BootlegTraderApp', accounts => {
   });
 
   it('cannot be purchased with a zero price', async () => {
+    await app.setTokenPrice(0);
+
     let errorMsg = '';
 
     try {
@@ -102,14 +104,20 @@ contract('BootlegTraderApp', accounts => {
       expect(await app.getOwner()).toEqual(thirdOwner);
     });
 
-    describe('withdrawing eth after purchase', async () => {
-      it('allows withdrawing', async () => {
-        let balance = await app.getBalance({ from: firstOwner });
-        expect(parseInt(balance)).toBeGreaterThan(0);
+    describe('owner withdrawing eth after purchase', async () => {
+      let withdrawResult;
 
-        await app.withdraw({ from: firstOwner });
+      beforeEach(async () => {
+        withdrawResult = await app.withdraw({ from: firstOwner });
+      });
+
+      it('shows zero balance for firstOwner', async () => {
         balance = await app.getBalance({ from: firstOwner });
         expect(parseInt(balance)).toEqual(0);
+      });
+
+      it('emits a PaymentWithdrawn event', async () => {
+        expect(withdrawResult.logs[0]['event']).toEqual('PaymentWithdrawn');
       });
     });
   });
