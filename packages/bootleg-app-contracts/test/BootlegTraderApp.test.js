@@ -112,7 +112,7 @@ contract('BootlegTraderApp', accounts => {
       });
 
       it('shows zero balance for firstOwner', async () => {
-        balance = await app.getBalance({ from: firstOwner });
+        const balance = await app.getBalance({ from: firstOwner });
         expect(parseInt(balance)).toEqual(0);
       });
 
