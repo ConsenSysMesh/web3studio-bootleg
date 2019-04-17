@@ -10,7 +10,7 @@ const Web3 = require('web3');
 
 require('dotenv').config();
 
-const mnemonic = process.env.WALLET_MNEMONIC;
+const mnemonic = process.env.SEED_PHRASE;
 const infuraApiKey = process.env.INFURA_API_KEY;
 
 const solcVersion = '0.5.4';

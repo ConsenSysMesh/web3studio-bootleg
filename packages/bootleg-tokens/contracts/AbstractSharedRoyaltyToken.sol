@@ -57,10 +57,10 @@ contract AbstractSharedRoyaltyToken is ISharedRoyaltyToken, ERC721 {
   }
 
   /**
-   * @notice Gets the franchisor balance of the specified address
+   * @notice Gets the franchisor balance of tokens (i.e. the count of tokens) the specified address
    *
    * @param franchisor address to query the balance of
-   * @return uint256 representing the amount franchised by the passed address
+   * @return uint256 representing the number of tokens owned by the franchisor address
    */
   function franchisorBalanceOf(address franchisor) public view notZeroAddr(franchisor) returns (uint256) {
     return _franchisorTokensCount[franchisor];

@@ -76,4 +76,22 @@ contract('BootlegToken', accounts => {
 
     expect(error).toBeInstanceOf(Error);
   });
+
+  it('allows setting of a trader App to trade the token', async () => {
+    await token.setTraderApp(accounts[8]);
+    expect(await token.traderApp()).toEqual(accounts[8]);
+  });
+
+  it('only allows the minter to set the Trading app', async () => {
+    let errorMsg = '';
+
+    try {
+      const someRando = await web3.eth.accounts.create();
+      await token.setTraderApp(someRando.address, { from: someRando.address });
+    } catch (e) {
+      errorMsg = e.toString();
+    }
+
+    expect(errorMsg).toMatch(/account not recognized/i);
+  });
 });
