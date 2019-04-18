@@ -24,7 +24,6 @@ latest updates here through GitHub. Please join the discussion, create issues, a
 
 Check out the Bootleg [developer kit](https://consensys.net/web3studio/bootleg), and read more about the project in the latest article about Bootleg on [Medium](https://link.medium.com/ZgnzmtPMrT)
 
-
 ## Project overview
 
 This repo holds the code and development assets for the Bootleg SDK. The repo and many of the high level concepts in this project all pay homage to the original article about the idea published on [Medium](https://link.medium.com/ZgnzmtPMrT). Whenever possible we have attempted to use more generic terms in our code and domain models so that as much code from this repo can be re-used, shared, re-purposed by anyone. We have done our best but it is a tradeoff between making something we feel embodies the spirit of the idea and speculating about what would be useful for someone using the work to build their own idea.
@@ -48,10 +47,11 @@ would want to look if you want to use our pay-it-backwards tokens in your dApp.
 Here lies the smart contracts used by our fictional app. It's a great reference
 implementation for your Bootleg-esk dApp.
 
-### [`dont-crypto`](packages/dont-crypto)
+### [`dont-crypto`](https://github.com/ConsenSys/web3studio-dONT)
 
 Where the rubber hits the road. A phenomenal library to encrypt and then cryptographically
 watermark an asset to allow copyright holders to find who leaked their content.
+Note: dONT is getting a lot of traction outside of the Bootleg project so it was moved into it's own repo. [https://github.com/ConsenSys/web3studio-dONT](https://github.com/ConsenSys/web3studio-dONT) Follow along with the action there!
 
 ### [`examples`](packages/examples)
 
@@ -78,7 +78,7 @@ We are **imaging** that the system to support the story defined in Bootleg would
 
 - Approving new Bootleggers and Artists, management of their profiles, bootlegs, and any administration around royalty payments.
 - Management of Bootleg artifacts and sales
-- System for resolution of any disputes around ownership/access 
+- System for resolution of any disputes around ownership/access
 - Ticketing system for issues with the quality of the Bootleg video/audio, access to decrypted videos, etc... (e.g. re-uploading a file, adjusting payouts, removing bad-actor members, offensive content, etc...)
 
 ### General System Flow
@@ -87,13 +87,11 @@ The diagram below outlines the different users involved in the Bootleg process. 
 
 ![General System Flow](docs/images/GeneralSystemFlow.png)
 
-
 ### Bootleg Creation Sequence
 
 The diagram below shows the sequence of events during the minting of new Bootleg tokens.
 
 ![Bootleg Creation Sequence](docs/images/BootlegCreationSequence.png)
-
 
 ### New Member Added Sequence
 
@@ -113,8 +111,8 @@ After our survey of what is out there (and there is a lot, much I'm not even men
 
 ![Token Design](docs/images/TokenComposition.png)
 
-
 #### Domain models
+
 ![App and Smart Contract Models](docs/images/DomainModel.png)
 
 ## License
