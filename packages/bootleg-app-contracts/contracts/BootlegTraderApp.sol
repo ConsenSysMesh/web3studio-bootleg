@@ -7,7 +7,7 @@ contract BootlegTraderApp {
   // The bootleg token contract
   BootlegToken public bootlegToken;
   // Only trading one token for this dApp, this is the ID for the token
-  uint256 public tokenToTrade;
+  uint256 public bootlegTokenID;
   // Only one token traded only requires one price to store
   uint256 public tokenPrice;
   
@@ -23,7 +23,7 @@ contract BootlegTraderApp {
    */
   constructor (address deployedAddress, uint256 tokenId) public {
     bootlegToken = BootlegToken(deployedAddress);
-    tokenToTrade = tokenId;
+    bootlegTokenId = tokenId;
   }
 
   /**
@@ -35,21 +35,13 @@ contract BootlegTraderApp {
     require(msg.value == tokenPrice, "Must provide eth to franchise the token");
 
     address newOwner = msg.sender;
-    address owner = bootlegToken.ownerOf(tokenToTrade);
+    address owner = bootlegToken.ownerOf(bootlegTokenId);
     // Do the token transfer
-    bootlegToken.safeTransferFrom.value(msg.value)(owner, newOwner, tokenToTrade, "");
+    bootlegToken.safeTransferFrom.value(msg.value)(owner, newOwner, bootlegTokenId, "");
     // set the price to zero to prevent purchase
     setTokenPrice(0);
 
     emit Purchased(newOwner, tokenPrice);
-  }
-
-  /**
-  * @notice Gets the token price given a tokenId
-  * @return uint256 the token price in Wei
-   */
-  function getTokenPrice() public view returns (uint256) {
-    return tokenPrice;
   }
 
   /**
@@ -58,8 +50,7 @@ contract BootlegTraderApp {
   * @param newPrice uint256 The new token price in Wei
    */
   function setTokenPrice(uint256 newPrice) public {
-    address currentOwner = bootlegToken.ownerOf(tokenToTrade);
-    // TODO: Or allow minter to do this
+    address currentOwner = bootlegToken.ownerOf(bootlegTokenId);
     require(msg.sender == currentOwner, "Only the owner can change the token price");
     uint256 oldPrice = tokenPrice;
     tokenPrice = newPrice;
@@ -72,7 +63,7 @@ contract BootlegTraderApp {
   * @return address Address of current owner
   */
   function getOwner() public view returns (address) {
-    return bootlegToken.ownerOf(tokenToTrade);
+    return bootlegToken.ownerOf(bootlegTokenId);
   }
 
   /**
@@ -80,16 +71,16 @@ contract BootlegTraderApp {
   * @return uint256 Payment balance in wei
   */
   function getBalance() public view returns (uint256) {
-    return bootlegToken.paymentBalanceOf(msg.sender, tokenToTrade);
+    uint256 balance = bootlegToken.paymentBalanceOf(msg.sender, bootlegTokenId);
   }
 
   /**
-  * @notice Use to widthraws eth from the payments you recieved during franchising
+  * @notice Use to widthraws wei from the payments you recieved during franchising
   * Emits a PaymentWithdrawn event
   * @dev Calls the withdrawPayment function on the BootlegToken 
   */
   function withdraw() public {
-    bootlegToken.withdrawPayment(msg.sender, tokenToTrade);
+    bootlegToken.withdrawPayment(msg.sender, bootlegTokenId);
 
     emit PaymentWithdrawn(msg.sender);
   }
