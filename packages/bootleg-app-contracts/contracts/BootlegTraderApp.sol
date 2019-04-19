@@ -69,7 +69,7 @@ contract BootlegTraderApp {
 
   /**
   * @notice Gets current payment balance of your token payments
-  * @return uint256 Payment balance in eth
+  * @return uint256 Payment balance in Wei 
   */
   function getBalance() public view returns (uint256) {
     return bootlegToken.paymentBalanceOf(msg.sender, bootlegTokenId);
