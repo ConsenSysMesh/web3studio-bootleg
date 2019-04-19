@@ -7,7 +7,7 @@ contract BootlegTraderApp {
   // The bootleg token contract
   BootlegToken public bootlegToken;
   // Only trading one token for this dApp, this is the ID for the token
-  uint256 public bootlegTokenID;
+  uint256 public bootlegTokenId;
   // Only one token traded only requires one price to store
   uint256 public tokenPrice;
   
@@ -51,6 +51,7 @@ contract BootlegTraderApp {
    */
   function setTokenPrice(uint256 newPrice) public {
     address currentOwner = bootlegToken.ownerOf(bootlegTokenId);
+    // TODO: Or allow minter to do this
     require(msg.sender == currentOwner, "Only the owner can change the token price");
     uint256 oldPrice = tokenPrice;
     tokenPrice = newPrice;
@@ -68,14 +69,14 @@ contract BootlegTraderApp {
 
   /**
   * @notice Gets current payment balance of your token payments
-  * @return uint256 Payment balance in wei
+  * @return uint256 Payment balance in eth
   */
   function getBalance() public view returns (uint256) {
-    uint256 balance = bootlegToken.paymentBalanceOf(msg.sender, bootlegTokenId);
+    return bootlegToken.paymentBalanceOf(msg.sender, bootlegTokenId);
   }
 
   /**
-  * @notice Use to widthraws wei from the payments you recieved during franchising
+  * @notice Use to widthraws eth from the payments you recieved during franchising
   * Emits a PaymentWithdrawn event
   * @dev Calls the withdrawPayment function on the BootlegToken 
   */

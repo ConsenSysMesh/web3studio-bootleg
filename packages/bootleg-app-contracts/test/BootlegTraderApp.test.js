@@ -21,7 +21,7 @@ contract('BootlegTraderApp', accounts => {
   });
 
   it('has a price of zero by default', async () => {
-    expect((await app.getTokenPrice()).toString()).toEqual('0');
+    expect((await app.tokenPrice()).toString()).toEqual('0');
   });
 
   it('cannot be purchased with a zero price', async () => {
@@ -51,7 +51,7 @@ contract('BootlegTraderApp', accounts => {
     });
 
     it('allows the owner to set the price', async () => {
-      expect((await app.getTokenPrice()).toString()).toEqual(twoEthInWei);
+      expect((await app.tokenPrice()).toString()).toEqual(twoEthInWei);
     });
 
     it('emits a PriceChange event', async () => {
