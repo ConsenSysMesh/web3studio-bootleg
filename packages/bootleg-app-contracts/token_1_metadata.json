@@ -1,6 +1,6 @@
 {
-  "name": "Outside Outside SXSW2019 Show - 1st BootlegToken ever!!!!!",
-  "description": "Recording of the artist 'Outside Outside' at the Consensys SXSW Blockchain house. Captured March 13th, 2019 @ 8PM",
-  "image": "Some URI to cover art",
-  "video": "Some URI to Bootleg video asset"
+  "name": "outsideOUTSIDE SXSW2019 Show - 1st BootlegToken ever!!!",
+  "description": "Recording of the artist outsideOUTSIDE at the Consensys SXSW Blockchain house. Captured March 13th, 2019 @ 8PM. https://www.outsideoutside.band",
+  "image": "https://s3.amazonaws.com/web3studio-bootlegs/outsideOUTSIDE-SXSW2019-Bootleg-cover.png",
+  "video": "https://s3.amazonaws.com/web3studio-bootlegs/outsideOUTSIDE-SXSW2019-Bootleg.mp4"
 }
