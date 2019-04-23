@@ -2846,7 +2846,7 @@ concat-stream@^2.0.0:
     readable-stream "^3.0.2"
     typedarray "^0.0.6"
 
-"concat-stream@github:hugomrdias/concat-stream#feat/smaller":
+concat-stream@hugomrdias/concat-stream#feat/smaller:
   version "2.0.0"
   resolved "https://codeload.github.com/hugomrdias/concat-stream/tar.gz/057bc7b5d6d8df26c8cf00a3f151b6721a0a8034"
   dependencies:
@@ -7188,7 +7188,7 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
-"ndjson@github:hugomrdias/ndjson#feat/readable-stream3":
+ndjson@hugomrdias/ndjson#feat/readable-stream3:
   version "1.5.0"
   resolved "https://codeload.github.com/hugomrdias/ndjson/tar.gz/4db16da6b42e5b39bf300c3a7cde62abb3fa3a11"
   dependencies:
@@ -9228,15 +9228,10 @@ solc@^0.5.5:
     tmp "0.0.33"
     yargs "^11.0.0"
 
-solidity-parser-antlr@^0.4.1:
+solidity-parser-antlr@0.4.1, solidity-parser-antlr@^0.4.1, solidity-parser-antlr@^0.4.2:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/solidity-parser-antlr/-/solidity-parser-antlr-0.4.1.tgz#fee968c36f674ac61c3ee8a31550317dc943cdac"
   integrity sha512-3lXZd3kUbCyiLCieDeyhAm2jPtPXKQYVR5wItbVLRw4MW4fv5pSGC3v4x6BRucKVE6tjVZ9AhTErkqRu2KlXDg==
-
-solidity-parser-antlr@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/solidity-parser-antlr/-/solidity-parser-antlr-0.4.2.tgz#b862eba5936e7a90b4f5f1c8eb1d33fe86650f78"
-  integrity sha512-0OKT2YKZAqPe14HN7Nbo24hjmnyUYh92UjyZG0Zz2rpQhl/w8asX8qHb+ASSXfayQaiW8g9zGIupXEE355tOQQ==
 
 solium-config-web3studio@^1.2.0:
   version "1.2.0"

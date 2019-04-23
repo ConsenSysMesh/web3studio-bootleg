@@ -49,7 +49,6 @@ module.exports = async (deployer, network, accounts) => {
   // See 'metadata section' https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md
   const metaDataURI = `https://ipfs.infura.io/ipfs/${ipfsResult[0].hash}`;
 
-  console.log(`METADATA: ${metaDataURI}`);
   // Do the minting with our metadata URI
   await token.mintWithTokenURI(theArtist, tokenId, metaDataURI);
 
