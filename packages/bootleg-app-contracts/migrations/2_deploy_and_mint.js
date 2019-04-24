@@ -44,7 +44,7 @@ module.exports = async (deployer, network, accounts) => {
   // The upload the json metadata defined by ERC721
   const path = './token_1_metadata.json';
   const ipfs = ipfsClient(ipfsConfig.host, ipfsConfig.port, ipfsConfig.options);
-  const ipfsResult = await ipfs.addFromFs(path, {});
+  const ipfsResult = await ipfs.addFromFs(path, { pin: true });
 
   // See 'metadata section' https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md
   const metaDataURI = `https://ipfs.infura.io/ipfs/${ipfsResult[0].hash}`;
