@@ -19,6 +19,7 @@
     "url": "https://github.com/ConsenSys/web3studio-bootleg/issues"
   },
   "dependencies": {
-    "bootleg-tokens": "^1.0.0"
+    "bootleg-tokens": "^1.0.0",
+    "ipfs-http-client": "^30.1.3"
   }
 }

@@ -162,9 +162,9 @@ when :encrypt
   whirly_wrap('Uploading') do
     handler.encrypt_stream(options[:path])
   end
-  # Checking metadata on the file 
-  pp handler.get_metadata(options[:path])
-  puts "Put file to s3://#{options[:bucket]}/#{options[:path]}"
+  
+  s3path = File.basename(options[:path])
+  puts "Put file to s3://#{options[:bucket]}/#{s3path}"
 
   # The user should probably take note of this
   # since the encryption key is not stored
@@ -172,7 +172,8 @@ when :encrypt
   puts "Key Used: #{handler.aes_key_base64}"
   puts '-----------------------------------------------------'
 
-
+  # Checking metadata on the file 
+  pp handler.get_metadata(s3path)
 
 when :decrypt
   file_name = Time.now.to_i.to_s + '-' + File.basename(options[:path])

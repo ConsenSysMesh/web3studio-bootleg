@@ -1,6 +1,16 @@
 const BootlegToken = artifacts.require('BootlegToken');
 const BootlegTraderApp = artifacts.require('BootlegTraderApp');
 
+const ipfsClient = require('ipfs-http-client');
+
+const ipfsConfig = {
+  host: 'ipfs.infura.io',
+  port: 5001,
+  options: {
+    protocol: 'https'
+  }
+};
+
 module.exports = async (deployer, network, accounts) => {
   /**
    * Note: This is an example deployment and migration script we created
@@ -20,10 +30,6 @@ module.exports = async (deployer, network, accounts) => {
   // Should be the Bootlegger
   const theBootlegger = process.env.BOOTLEGGER_ADDRESS || accounts[1];
 
-  // The URL to the json metadata defined by ERC721
-  // See 'metadata section' https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md
-  const metaDataURI = 'https://ipfs.infura.io/ipfs/QmSomeHash';
-
   // Deploy our BootlegToken
   await deployer.deploy(BootlegToken, 'Bootleg', 'BLEG', 25);
   const token = await BootlegToken.deployed();
@@ -34,6 +40,14 @@ module.exports = async (deployer, network, accounts) => {
 
   // Set the token to have the app as the only trader
   await token.setTraderApp(app.address);
+
+  // The upload the json metadata defined by ERC721
+  const path = './token_1_metadata.json';
+  const ipfs = ipfsClient(ipfsConfig.host, ipfsConfig.port, ipfsConfig.options);
+  const ipfsResult = await ipfs.addFromFs(path, { pin: true });
+
+  // See 'metadata section' https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md
+  const metaDataURI = `https://ipfs.infura.io/ipfs/${ipfsResult[0].hash}`;
 
   // Do the minting with our metadata URI
   await token.mintWithTokenURI(theArtist, tokenId, metaDataURI);
