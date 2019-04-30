@@ -1,0 +1,44 @@
+{
+  "name": "bootleg-app",
+  "version": "1.0.0",
+  "description": "Bootleg trading application",
+  "author": "Web3Studio Developers <web3studio@consensys.net>",
+  "homepage": "https://github.com/ConsenSys/web3studio-bootleg#readme",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ConsenSys/web3studio-bootleg.git"
+  },
+  "scripts": {
+    "test": "CI=true react-scripts test --env=jsdom",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject"
+  },
+  "bugs": {
+    "url": "https://github.com/ConsenSys/web3studio-bootleg/issues"
+  },
+  "dependencies": {
+    "bootleg-app-contracts": "^1.0.0",
+    "drizzle": "^1.4.0",
+    "drizzle-react": "^1.2.0",
+    "drizzle-react-components": "^1.4.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "2.1.8",
+    "rimble-ui": "^0.7.1",
+    "styled-components": "^4.2.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "jest": "23.6.0"
+  }
+}

@@ -137,4 +137,8 @@ contract('BootlegTraderApp', accounts => {
 
     expect(errorMsg).toMatch(/must provide eth/i);
   });
+
+  it('has an accessor for the token URI', async () => {
+    expect(await app.getTokenURI()).toEqual(mockURI);
+  });
 });

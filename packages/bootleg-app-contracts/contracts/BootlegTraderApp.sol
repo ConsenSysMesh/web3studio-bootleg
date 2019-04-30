@@ -85,4 +85,12 @@ contract BootlegTraderApp {
 
     emit PaymentWithdrawn(msg.sender);
   }
+
+  /**
+  * @notice  Gets the metadataURI for the token
+  * @return string token URI
+  */
+  function getTokenURI() public view returns (string memory) {
+    return bootlegToken.tokenURI(bootlegTokenId);
+  }
 }

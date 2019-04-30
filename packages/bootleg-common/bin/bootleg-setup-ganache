@@ -3,8 +3,9 @@
 cleanup_ganache() {
   # Kill the ganache instance that we started (if we started one and if it's still running).
   if [ -n "$ganache_pid" ] && ps -p $ganache_pid > /dev/null; then
-    echo "Stopping Ganache"
+    echo "Stopping Ganache... [pid:${ganache_pid}]"
     kill $ganache_pid
+    echo "Ganache stopped!"
   fi
 }
 
@@ -16,9 +17,10 @@ ganache_running() {
 }
 
 start_ganache() {
+  echo "Starting Ganache..."
   ganache-cli --port "$ganache_port" --mnemonic "$ganache_mnemonic" > /dev/null &
   ganache_pid=$!
-
+  echo "Ganache started!"
   while ! ganache_running; do
     sleep 0.1
   done
@@ -27,9 +29,8 @@ start_ganache() {
 trap cleanup_ganache EXIT
 
 if ganache_running; then
-  echo "Using existing ganache instance"
+  echo "Using existing ganache instance on port ${ganache_port}"
 else
-  echo "Starting our own ganache instance"
   start_ganache
 fi
 
