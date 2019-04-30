@@ -3,7 +3,6 @@ import { DrizzleProvider } from 'drizzle-react';
 import { LoadingContainer } from 'drizzle-react-components';
 import drizzleOptions from './drizzleOptions';
 import TraderComponent from './TraderComponent';
-
 class App extends Component {
   render() {
     return (

@@ -10,9 +10,7 @@
     "url": "git+https://github.com/ConsenSys/web3studio-bootleg.git"
   },
   "scripts": {
-    "test": "bootleg-truffle-test",
-    "test:watch": ". bootleg-setup-ganache; chokidar --initial \"test/**/*.js\" \"contracts/**/*.sol\" -c \"yarn test\"",
-    "truffle": "truffle",
+    "test": "react-scripts test",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
@@ -39,5 +37,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "jest": "23.6.0"
+  }
 }
