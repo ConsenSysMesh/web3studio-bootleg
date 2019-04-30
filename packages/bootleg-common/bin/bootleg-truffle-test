@@ -5,6 +5,6 @@ set -e
 
 . bootleg-setup-ganache
 
-truffle test && bootleg-coverage-ignore && \
+truffle test --network test && bootleg-coverage-ignore && \
 istanbul report text html --include coverage/coverage.json && \
 istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100 --include coverage/coverage.json
