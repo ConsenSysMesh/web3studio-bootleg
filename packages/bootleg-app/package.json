@@ -10,7 +10,7 @@
     "url": "git+https://github.com/ConsenSys/web3studio-bootleg.git"
   },
   "scripts": {
-    "test": "react-scripts test",
+    "test": "CI=true react-scripts test --env=jsdom",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
