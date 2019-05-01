@@ -41,6 +41,7 @@ const TraderComponent = ({ accounts, drizzleStatus }) => (
             height: '200px',
             float: 'left'
           }}
+          alt="Bootleg Token Cover Art"
           src="https://s3.amazonaws.com/web3studio-bootlegs/outsideOUTSIDE-SXSW2019-Bootleg-cover.png"
         />
         <span style={{ fontSize: '2em' }}>Token #1</span>
