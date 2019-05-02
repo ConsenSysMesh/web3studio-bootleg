@@ -1,9 +1,13 @@
-module.exports = () => {
+export default () => {
   let networks = {
     // MainNet
     '1': {},
     // Rinkeby
-    '4': {}
+    '4': {
+      address: '0x05128BeEe1652D7DB3e323c17B46d7F762767a22',
+      transactionHash:
+        '0xcc4e4d069cbcb02e6f4ed126d38e268c7faf70708d2f1cb999901453c2aacc8f'
+    }
   };
 
   if (process.env.NODE_ENV !== 'production') {
@@ -11,7 +15,10 @@ module.exports = () => {
       networks: devNetworks
     } = require('../build/contracts/BootlegTraderApp');
 
-    networks = devNetworks;
+    networks = {
+      ...networks,
+      ...devNetworks
+    };
   }
 
   return {

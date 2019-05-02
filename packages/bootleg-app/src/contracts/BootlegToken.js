@@ -1,9 +1,13 @@
-module.exports = () => {
+export default () => {
   let networks = {
     // MainNet
     '1': {},
     // Rinkeby
-    '4': {}
+    '4': {
+      address: '0x220Cb1f5e58D205c713256d4Efc4f4165b4fdfE3',
+      transactionHash:
+        '0xa658e0175e5362919b9300d60e4e9dcb3450bc6c2c5c8e6506990056bfb494e5'
+    }
   };
 
   if (process.env.NODE_ENV !== 'production') {
@@ -11,7 +15,10 @@ module.exports = () => {
       networks: devNetworks
     } = require('../build/contracts/BootlegToken');
 
-    networks = devNetworks;
+    networks = {
+      ...networks,
+      ...devNetworks
+    };
   }
 
   return {
