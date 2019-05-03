@@ -24,14 +24,14 @@ module.exports = async (deployer, network, accounts) => {
   // The Bootleg Token ID
   const tokenId = web3.utils.toBN(1);
 
-  // Should be the Band
-  const theArtist = process.env.BAND_ADDRESS || accounts[0];
+  // The artist ethereum wallet address
+  const theArtist = process.env.ARTIST_ADDRESS || accounts[0];
 
-  // Should be the Bootlegger
+  // The bootlegger ethereum wallet address
   const theBootlegger = process.env.BOOTLEGGER_ADDRESS || accounts[1];
 
   // Deploy our BootlegToken
-  await deployer.deploy(BootlegToken, 'Bootleg', 'BLEG', 25);
+  await deployer.deploy(BootlegToken, 'Bootleg', 'BLEG', 10);
   const token = await BootlegToken.deployed();
 
   // Deploy the trader app and pass in the token contract

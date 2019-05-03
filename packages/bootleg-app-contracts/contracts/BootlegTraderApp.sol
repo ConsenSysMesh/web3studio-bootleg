@@ -93,4 +93,14 @@ contract BootlegTraderApp {
   function getTokenURI() public view returns (string memory) {
     return bootlegToken.tokenURI(bootlegTokenId);
   }
+
+  /**
+  * @notice Returns true/false if the address provided is for a franchisor
+  * @param possibleFranchisor address The address of the account
+  * @return bool 
+  */
+  function isTokenFranchisor(address possibleFranchisor) public view returns (bool) {
+    return bootlegToken.isTokenFranchisor(possibleFranchisor, bootlegTokenId);
+  }
+
 }
