@@ -1,11 +1,11 @@
 {
-  "main.js": "/ConsenSys/web3studio-bootleg/static/js/main.b5e24bb6.chunk.js",
-  "main.js.map": "/ConsenSys/web3studio-bootleg/static/js/main.b5e24bb6.chunk.js.map",
-  "runtime~main.js": "/ConsenSys/web3studio-bootleg/static/js/runtime~main.e9e26cf9.js",
-  "runtime~main.js.map": "/ConsenSys/web3studio-bootleg/static/js/runtime~main.e9e26cf9.js.map",
-  "static/js/2.4b0772ec.chunk.js": "/ConsenSys/web3studio-bootleg/static/js/2.4b0772ec.chunk.js",
-  "static/js/2.4b0772ec.chunk.js.map": "/ConsenSys/web3studio-bootleg/static/js/2.4b0772ec.chunk.js.map",
-  "index.html": "/ConsenSys/web3studio-bootleg/index.html",
-  "precache-manifest.0a9a0172430fa62db7646b2fc84969f2.js": "/ConsenSys/web3studio-bootleg/precache-manifest.0a9a0172430fa62db7646b2fc84969f2.js",
-  "service-worker.js": "/ConsenSys/web3studio-bootleg/service-worker.js"
+  "main.js": "/web3studio-bootleg/static/js/main.b5e24bb6.chunk.js",
+  "main.js.map": "/web3studio-bootleg/static/js/main.b5e24bb6.chunk.js.map",
+  "runtime~main.js": "/web3studio-bootleg/static/js/runtime~main.cfc5437b.js",
+  "runtime~main.js.map": "/web3studio-bootleg/static/js/runtime~main.cfc5437b.js.map",
+  "static/js/2.6f044697.chunk.js": "/web3studio-bootleg/static/js/2.6f044697.chunk.js",
+  "static/js/2.6f044697.chunk.js.map": "/web3studio-bootleg/static/js/2.6f044697.chunk.js.map",
+  "index.html": "/web3studio-bootleg/index.html",
+  "precache-manifest.0845b2d2da34447e2b496425410a0b26.js": "/web3studio-bootleg/precache-manifest.0845b2d2da34447e2b496425410a0b26.js",
+  "service-worker.js": "/web3studio-bootleg/service-worker.js"
 }

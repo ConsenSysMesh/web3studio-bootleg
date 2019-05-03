@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/ConsenSys/web3studio-bootleg/precache-manifest.0a9a0172430fa62db7646b2fc84969f2.js"
+  "/web3studio-bootleg/precache-manifest.0845b2d2da34447e2b496425410a0b26.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/ConsenSys/web3studio-bootleg/index.html", {
+workbox.routing.registerNavigationRoute("/web3studio-bootleg/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
