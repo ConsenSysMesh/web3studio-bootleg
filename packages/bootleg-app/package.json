@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Bootleg trading application",
   "author": "Web3Studio Developers <web3studio@consensys.net>",
-  "homepage": "https://github.com/ConsenSys/web3studio-bootleg#readme",
+  "homepage": "https://consensys.github.io/web3studio-bootleg",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
