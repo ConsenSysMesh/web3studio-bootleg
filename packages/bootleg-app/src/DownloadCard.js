@@ -1,25 +1,30 @@
 import React from 'react';
 import { drizzleConnect } from 'drizzle-react';
-import { Heading, Card, Link, Text } from 'rimble-ui';
+import { Heading, Link, Text, Card, Box } from 'rimble-ui';
 
-const DownloadCard = ({ accounts, drizzzleStatus }) => {
+const DownloadCard = ({ accounts, drizzzleStatus, ...props }) => {
   return (
-    <Card>
-      <Heading.h2>
-        Congratulations! You are a franchisor and can access the bootleg video
-      </Heading.h2>
-      Download the video from this link:{' '}
-      <Link
-        href="https://s3.amazonaws.com/web3studio-bootlegs/outsideOUTSIDE-SXSW2019-Bootleg.mp4"
-        title="Download Video"
-        download="outsideOUTSIDE-SXSW2019-Bootleg.mp4"
-      >
-        https://s3.amazonaws.com/web3studio-bootlegs/outsideOUTSIDE-SXSW2019-Bootleg.mp4
-      </Link>
-      <Text.p style={{ fontWeight: 'bold' }}>
-        Decryption key for video file will be provided via email.
-      </Text.p>
-    </Card>
+    <Box {...props}>
+      <Card height={'100%'}>
+        <Heading.h3 pb={3}>Download</Heading.h3>
+        <Text>
+          You are a franchisor and can{' '}
+          <Link
+            fontSize={'inherit'}
+            href="https://s3.amazonaws.com/web3studio-bootlegs/outsideOUTSIDE-SXSW2019-Bootleg.mp4"
+            title="Download Video"
+            download="outsideOUTSIDE-SXSW2019-Bootleg.mp4"
+          >
+            download
+          </Link>{' '}
+          the bootleg video
+        </Text>
+        <Text bold>
+          Decryption key and instructions for the video file will be provided
+          via email.
+        </Text>
+      </Card>
+    </Box>
   );
 };
 

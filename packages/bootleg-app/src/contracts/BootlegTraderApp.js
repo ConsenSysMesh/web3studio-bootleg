@@ -222,6 +222,26 @@ export default () => {
         stateMutability: 'view',
         type: 'function',
         signature: '0xd4a19116'
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: 'possibleFranchisor',
+            type: 'address'
+          }
+        ],
+        name: 'isTokenFranchisor',
+        outputs: [
+          {
+            name: '',
+            type: 'bool'
+          }
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function',
+        signature: '0x8a421b74'
       }
     ]
   };
