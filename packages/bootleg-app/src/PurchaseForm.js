@@ -13,24 +13,21 @@ const PurchaseForm = ({ accounts, drizzzleStatus }, { drizzle }) => {
       method="tokenPrice"
       render={tokenPrice =>
         tokenPrice <= web3.utils.toBN(0) ? (
-          <Heading.h2>Not currently for sale</Heading.h2>
+          <>
+            <Heading.h3 pb={3}>Buy</Heading.h3>
+            <Text>Not currently for sale</Text>
+          </>
         ) : (
           <>
-            <Heading.h2>
+            <Heading.h3 pb={3}>Buy</Heading.h3>
+            <Text pb={4}>
               Current price is: {web3.utils.fromWei(tokenPrice, 'ether')} Eth
-              <Text.p style={{ color: 'red' }}>in Wei:{tokenPrice}</Text.p>
-            </Heading.h2>
+            </Text>
             <ContractForm
               contract="BootlegTraderApp"
               method="purchase"
               sendArgs={{ value: tokenPrice }}
-              render={({
-                inputs,
-                inputTypes,
-                state,
-                handleInputChange,
-                handleSubmit
-              }) => (
+              render={({ handleSubmit }) => (
                 <Form onSubmit={handleSubmit}>
                   <Button
                     key="submit"

@@ -1,55 +1,26 @@
 import React from 'react';
 import { drizzleConnect } from 'drizzle-react';
-import { ContractData } from 'drizzle-react-components';
-import { Flex, Box, Text, Image, Link, Blockie } from 'rimble-ui';
+import { Flex, Box, Text, Heading, Link } from 'rimble-ui';
 
-const TokenDetails = ({ accounts, drizzleStatus }) => (
-  <Flex>
-    <Box p={3}>
-      <Image
-        style={{
-          width: '350px',
-          height: '200px'
-        }}
-        alt="Bootleg Token Cover Art"
-        src="https://s3.amazonaws.com/web3studio-bootlegs/outsideOUTSIDE-SXSW2019-Bootleg-cover.png"
-      />
-    </Box>
-    <Box p={2}>
-      <Text.p style={{ fontSize: '3em' }}>Token #1</Text.p>
-      <Text.p style={{ fontSize: '2em' }}>outsideOUTSIDE SXSW2019 Show</Text.p>
-      <Text.p style={{ fontSize: '1.2em' }}>
-        Recording of the artist outsideOUTSIDE at the Consensys SXSW Blockchain
-        house. Captured March 13th, 2019 @ 8PM.{' '}
-        <Link href="https://www.outsideoutside.band">
-          https://www.outsideoutside.band
-        </Link>
-      </Text.p>
-      <Box>
-        <ContractData
-          contract="BootlegTraderApp"
-          method="getOwner"
-          render={ownerAddress => (
-            <>
-              Owned by:
-              <br />
-              <Blockie
-                opts={{
-                  seed: ownerAddress,
-                  color: '#dfe',
-                  bgcolor: '#a71',
-                  size: 15,
-                  scale: 3,
-                  spotcolor: '#000'
-                }}
-              />
-              <Text.span> {ownerAddress}</Text.span>
-            </>
-          )}
-        />
+const TokenDetails = ({ children }) => (
+  <>
+    <Flex alignItems={'center'} py={2}>
+      <Box width={[1, 1 / 2, 7 / 12]}>
+        <Heading.h2>outsideOUTSIDE SXSW2019 Show</Heading.h2>
+        <Text>
+          Recording of the artist{' '}
+          <Link href="https://www.outsideoutside.band">outsideOUTSIDEM</Link> at
+          the <Text.span bold>Consensys SXSW Blockchain House</Text.span>.
+        </Text>
+        <Text>Captured March 13th, 2019 @ 8PM.</Text>
       </Box>
-    </Box>
-  </Flex>
+
+      <Box py={3} width={[1, 1 / 2, 5 / 12]}>
+        {' '}
+        {children}
+      </Box>
+    </Flex>
+  </>
 );
 
 const mapStateToProps = state => {

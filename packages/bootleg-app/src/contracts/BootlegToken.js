@@ -743,6 +743,30 @@ export default () => {
         stateMutability: 'nonpayable',
         type: 'function',
         signature: '0x2ac35da3'
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: 'possibleFranchisor',
+            type: 'address'
+          },
+          {
+            name: 'tokenId',
+            type: 'uint256'
+          }
+        ],
+        name: 'isTokenFranchisor',
+        outputs: [
+          {
+            name: '',
+            type: 'bool'
+          }
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function',
+        signature: '0xa2378bdf'
       }
     ]
   };

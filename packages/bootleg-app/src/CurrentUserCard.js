@@ -1,34 +1,26 @@
 import React from 'react';
-import { drizzleConnect } from 'drizzle-react';
 import { AccountData } from 'drizzle-react-components';
-import { Card } from 'rimble-ui';
+import { Box, Text } from 'rimble-ui';
 
-const CurrentUserCard = ({ accounts, drizzleStatus }) => (
-  <Card fontSize={4}>
-    <span>You are logged in with the following account:</span>
+const CurrentUserCard = () => (
+  <Box fontSize={4} pt={4}>
+    <Text>Logged in as:</Text>
     <AccountData
-      accountIndex="0"
+      accountIndex={0}
       units="ether"
-      precision="3"
+      precision={3}
       render={({ address, balance, units }) => (
-        <div>
-          <div>
-            Address: <span style={{ color: 'red' }}>{address}</span>
-          </div>
-          <div>
-            Balance: <span style={{ color: 'red' }}>{balance}</span> {units}
-          </div>
-        </div>
+        <>
+          <Text>
+            Address: <span style={{ color: '#4E3FCE' }}>{address}</span>
+          </Text>
+          <Text>
+            Balance: <span style={{ color: '#4E3FCE' }}>{balance}</span> {units}
+          </Text>
+        </>
       )}
     />
-  </Card>
+  </Box>
 );
 
-const mapStateToProps = state => {
-  return {
-    accounts: state.accounts,
-    drizzleStatus: state.drizzleStatus
-  };
-};
-
-export default drizzleConnect(CurrentUserCard, mapStateToProps);
+export default CurrentUserCard;
