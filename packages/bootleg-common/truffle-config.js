@@ -78,7 +78,7 @@ module.exports = projectRoot => {
           if (!testProviderStarted) {
             // Within this function to not start the provider until it's needed
             testProvider.addProvider(
-              new WebsocketProvider({ rpcUrl: 'http://localhost:8545' })
+              new WebsocketProvider({ rpcUrl: 'http://localhost:7545' })
             );
 
             testProvider.start(err => {

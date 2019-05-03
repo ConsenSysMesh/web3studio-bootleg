@@ -23,3 +23,10 @@ deploy:
     skip_cleanup: true
     on:
       branch: master
+  - provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    keep_history: true
+    local_dir: packages/bootleg-app/build
+    on:
+      branch: master

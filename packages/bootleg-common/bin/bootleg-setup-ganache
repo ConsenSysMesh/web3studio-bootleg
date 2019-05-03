@@ -9,8 +9,7 @@ cleanup_ganache() {
   fi
 }
 
-ganache_port=8545
-ganache_mnemonic="candy maple cake sugar pudding cream honey rich smooth crumble sweet treat"
+ganache_port=7545
 
 ganache_running() {
   nc -z localhost "$ganache_port" &> /dev/null
@@ -18,7 +17,7 @@ ganache_running() {
 
 start_ganache() {
   echo "Starting Ganache..."
-  ganache-cli --port "$ganache_port" --mnemonic "$ganache_mnemonic" > /dev/null &
+  ganache-cli --port "$ganache_port" -d -i 42 > /dev/null &
   ganache_pid=$!
   echo "Ganache started!"
   while ! ganache_running; do
