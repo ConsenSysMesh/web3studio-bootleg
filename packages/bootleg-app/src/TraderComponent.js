@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { drizzleConnect } from 'drizzle-react';
 import { ContractData } from 'drizzle-react-components';
-import { Card } from 'rimble-ui';
+import { Card, Heading } from 'rimble-ui';
 
 // Custom components
 import TokenDetails from './TokenDetails';
@@ -16,9 +16,13 @@ const TraderComponent = ({ accounts, drizzleStatus }, { drizzle }) => {
   return (
     <div className="App">
       <CurrentUserCard />
-      <h1>Bootleg Token Trader</h1>
+      <Card>
+        <Heading.h1>Bootleg Token Trader</Heading.h1>
+      </Card>
       <Card>
         <TokenDetails />
+      </Card>
+      <Card>
         <ContractData
           contract="BootlegTraderApp"
           method="getOwner"
@@ -38,7 +42,9 @@ const TraderComponent = ({ accounts, drizzleStatus }, { drizzle }) => {
               <BalanceCard />
             </>
           ) : (
-            <h2>Video file available to franchisors only</h2>
+            <Card>
+              <Heading.h2>Video file available to franchisors only</Heading.h2>
+            </Card>
           )
         }
       />
