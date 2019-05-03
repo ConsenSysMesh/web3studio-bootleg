@@ -12,7 +12,7 @@ const PurchaseForm = ({ accounts, drizzzleStatus }, { drizzle }) => {
       contract="BootlegTraderApp"
       method="tokenPrice"
       render={tokenPrice =>
-        tokenPrice == 0 ? (
+        tokenPrice === web3.utils.toBN(0) ? (
           <h2>Not currently for sale</h2>
         ) : (
           <>

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { drizzleConnect } from 'drizzle-react';
-import { ContractData, ContractForm } from 'drizzle-react-components';
-import { Button, Form, Input, Card } from 'rimble-ui';
+import { ContractData } from 'drizzle-react-components';
+import { Card } from 'rimble-ui';
 
 // Custom components
 import TokenDetails from './TokenDetails';
@@ -13,27 +13,35 @@ import SellForm from './SellForm';
 import DownloadCard from './DownloadCard';
 
 const TraderComponent = ({ accounts, drizzleStatus }, { drizzle }) => {
-  const { web3, contracts } = drizzle;
-
-  const isOwner = () => {
-    return accounts[0] == contracts.BootlegTraderApp.methods.getOwner();
-  };
-
-  const isFrancisor = () => {
-    return true;
-  };
-
   return (
     <div className="App">
       <CurrentUserCard />
-      <h1>The Bootleg Token Trader</h1>
+      <h1>Bootleg Token Trader</h1>
       <Card>
         <TokenDetails />
-        {!isOwner() && <PurchaseForm />}
-        {isOwner() && <SellForm />}
+        <ContractData
+          contract="BootlegTraderApp"
+          method="getOwner"
+          render={ownerAddress =>
+            accounts[0] === ownerAddress ? <SellForm /> : <PurchaseForm />
+          }
+        />
       </Card>
-      {isFrancisor() && <DownloadCard />}
-      <BalanceCard />
+      <ContractData
+        contract="BootlegTraderApp"
+        method="isTokenFranchisor"
+        methodArgs={[accounts[0]]}
+        render={isFranchisor =>
+          isFranchisor ? (
+            <>
+              <DownloadCard />
+              <BalanceCard />
+            </>
+          ) : (
+            <h2>Video file available to franchisors only</h2>
+          )
+        }
+      />
     </div>
   );
 };

@@ -37,6 +37,16 @@ contract BootlegToken is ERC721MetadataMintable, BookendSharedRoyaltyToken, ERC7
   }
 
   /**
+  * @notice Returns true if the provide address is a token franchisor, false if not.
+  * @param possibleFranchisor address The address of the possible franchisor
+  * @param tokenId uint256 The id of the token
+  * @return bool 
+  */
+  function isTokenFranchisor(address possibleFranchisor, uint256 tokenId) public view returns (bool) {
+    return _isFranchisor(possibleFranchisor, tokenId);
+  }
+
+  /**
   * @dev OVERRIDE from 721 token standard. Returns whether the given spender can transfer a given token ID.
   * @param spender address of the spender to query
   * @param tokenId uint256 ID of the token to be transferred

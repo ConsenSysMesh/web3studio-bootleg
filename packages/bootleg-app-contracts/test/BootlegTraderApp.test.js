@@ -41,6 +41,10 @@ contract('BootlegTraderApp', accounts => {
     expect(errorMsg).toMatch(/must have non-zero price/i);
   });
 
+  it('knows the first owner is a franchisor', async () => {
+    expect(await app.isTokenFranchisor(firstOwner));
+  });
+
   describe('setting the price', async () => {
     let priceChangeResult;
 
@@ -93,6 +97,10 @@ contract('BootlegTraderApp', accounts => {
 
     it('emits a Purchase event', async () => {
       expect(purchaseResult.logs[1]['event']).toEqual('Purchased');
+    });
+
+    it('knows the second owner is also a franchisor', async () => {
+      expect(await app.isTokenFranchisor(secondOwner));
     });
 
     it('allows purchase by a third owner', async () => {

@@ -1,11 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { drizzleConnect } from 'drizzle-react';
-import { Card, Link } from 'rimble-ui';
+import { Card, Link, Text } from 'rimble-ui';
 
 const DownloadCard = ({ accounts, drizzzleStatus }) => {
   return (
     <Card>
+      <h2>
+        Congratulations! You are a franchisor and can access the bootleg video
+      </h2>
       Download the video from this link:{' '}
       <Link
         href="https://s3.amazonaws.com/web3studio-bootlegs/outsideOUTSIDE-SXSW2019-Bootleg.mp4"
@@ -14,6 +16,9 @@ const DownloadCard = ({ accounts, drizzzleStatus }) => {
       >
         https://s3.amazonaws.com/web3studio-bootlegs/outsideOUTSIDE-SXSW2019-Bootleg.mp4
       </Link>
+      <Text.p style={{ fontWeight: 'bold' }}>
+        Decryption key for video file will be provided via email.
+      </Text.p>
     </Card>
   );
 };

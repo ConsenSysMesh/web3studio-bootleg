@@ -34,6 +34,7 @@ const TokenDetails = ({ accounts, drizzleStatus }) => (
         render={ownerAddress => (
           <>
             Owned by:
+            <br />
             <Blockie
               opts={{
                 seed: ownerAddress,
@@ -44,11 +45,29 @@ const TokenDetails = ({ accounts, drizzleStatus }) => (
                 spotcolor: '#000'
               }}
             />
-            <Text.span>{ownerAddress}</Text.span>
+            <Text.span> {ownerAddress}</Text.span>
           </>
         )}
       />
     </p>
+    {/* <p>
+      <ContractData 
+        contract="BootlegTraderApp"
+        method="totalFranchisors"
+        render={totalFranchisors => (
+          <Text.span>Total Franchisors: {totalFranchisors}</Text.span>
+        )}
+        />
+    </p>
+    <p>
+      <ContractData 
+        contract="BootlegTraderApp"
+        method="total Payments"
+        render={totalPayments=> (
+          <Text.span>Total Payments: {totalPayments}</Text.span>
+        )}
+        />
+    </p> */}
   </>
 );
 

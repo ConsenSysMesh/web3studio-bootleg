@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { drizzleConnect } from 'drizzle-react';
-import { ContractForm } from 'drizzle-react-components';
+import { ContractForm, ContractData } from 'drizzle-react-components';
 import { Form, Button, Input } from 'rimble-ui';
 
 const SellForm = ({ accounts, drizzzleStatus }, { drizzle }) => {
@@ -26,7 +26,20 @@ const SellForm = ({ accounts, drizzzleStatus }, { drizzle }) => {
 
   return (
     <>
-      <h2>List for sale</h2>
+      <ContractData
+        contract="BootlegTraderApp"
+        method="tokenPrice"
+        render={tokenPrice =>
+          tokenPrice === web3.utils.toBN(0) ? (
+            <h2>Not currently for sale. Set price below to list for sale </h2>
+          ) : (
+            <h2>
+              Current price is: {web3.utils.fromWei(tokenPrice, 'ether')} Eth
+            </h2>
+          )
+        }
+      />
+      <h2>You are the owner, you may set the price.</h2>
       <ContractForm
         contract="BootlegTraderApp"
         method="setTokenPrice"
