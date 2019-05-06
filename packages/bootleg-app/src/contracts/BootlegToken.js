@@ -1,12 +1,16 @@
 export default () => {
   let networks = {
     // MainNet
-    '1': {},
+    '1': {
+      address: '0xEe9f2af26ec8E8B1aD63ECDAeb31A6A08458E048',
+      transactionHash:
+        '0xd8883f964dbe93ddeab0b73d5b9770048f4008b351ee5b8f6fdc54e7174c7b30'
+    },
     // Rinkeby
     '4': {
-      address: '0x220Cb1f5e58D205c713256d4Efc4f4165b4fdfE3',
+      address: '0x19671109381e6bF2001D0394c7F040A2C367Bc77',
       transactionHash:
-        '0xa658e0175e5362919b9300d60e4e9dcb3450bc6c2c5c8e6506990056bfb494e5'
+        '0x0b64e473896141444cb8e28262df4a08345a0e43780b8c48aba345e3d23e19ab'
     }
   };
 
