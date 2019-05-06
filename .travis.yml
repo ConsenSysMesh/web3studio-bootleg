@@ -29,4 +29,4 @@ deploy:
     keep_history: true
     local_dir: packages/bootleg-app/build
     on:
-      branch: master
+      branch: deployment_to_rinkeby
