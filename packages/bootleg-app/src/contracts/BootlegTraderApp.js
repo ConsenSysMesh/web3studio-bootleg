@@ -4,9 +4,9 @@ export default () => {
     '1': {},
     // Rinkeby
     '4': {
-      address: '0x05128BeEe1652D7DB3e323c17B46d7F762767a22',
+      address: '0x9e7bE1920Ba74233676a79dee07d7615d0AC3B11',
       transactionHash:
-        '0xcc4e4d069cbcb02e6f4ed126d38e268c7faf70708d2f1cb999901453c2aacc8f'
+        '0x16237c1942a99819ba39af3d87b87ee08c45ae8d27a0c28beeccd59b87cc7d44'
     }
   };
 
