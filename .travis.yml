@@ -13,6 +13,7 @@ before_install:
 branches:
   only:
     - master
+    - deployment_to_rinkeby
 
 before_deploy:
   - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
