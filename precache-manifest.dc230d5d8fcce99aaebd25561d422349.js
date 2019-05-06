@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/web3studio-bootleg/static/js/runtime~main.cfc5437b.js"
   },
   {
-    "revision": "e180ae34fb801603a0ae",
-    "url": "/web3studio-bootleg/static/js/main.db523236.chunk.js"
+    "revision": "0be86bb94aa0726f06c0",
+    "url": "/web3studio-bootleg/static/js/main.1286207a.chunk.js"
   },
   {
     "revision": "71797db144515fef58a7",
     "url": "/web3studio-bootleg/static/js/2.5f33cbc7.chunk.js"
   },
   {
-    "revision": "5b6746123114ee2e5a04463adcd3678f",
+    "revision": "fb303a8da63e3f9c19e9ccf7567473a0",
     "url": "/web3studio-bootleg/index.html"
   }
 ];
