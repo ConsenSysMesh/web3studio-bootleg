@@ -37,6 +37,13 @@ You'll notice two prefixes. `bootleg` projects are directly related to the ficti
 bootleg app, or the smart contracts it uses. `dONT` projects are related to a system to
 create non-transferable digital native assets, basically blockchain DRM.
 
+### [`bootleg-app`](packages/bootleg-app)
+
+Everything comes together here. This is the demo dApp where we created a UI to trade the first ever Bootleg
+token. It exercises the token and the mechanics of the SRNFT token. You can view the token details, list it
+for sale, purchase it from someone (joining the franchisors list), download the video file attached to
+the token, and (most importantly) withdraw the eth you earned as part of the franchisors.
+
 ### [`bootleg-tokens`](packages/bootleg-tokens)
 
 This is where you can find the smart contracts for the bootleg token itself. This is where you
@@ -52,11 +59,6 @@ implementation for your Bootleg-esk dApp.
 Where the rubber hits the road. A phenomenal library to encrypt and then cryptographically
 watermark an asset to allow copyright holders to find who leaked their content.
 Note: dONT is getting a lot of traction outside of the Bootleg project so it was moved into it's own repo. [https://github.com/ConsenSys/web3studio-dONT](https://github.com/ConsenSys/web3studio-dONT) Follow along with the action there!
-
-### [`examples`](packages/examples)
-
-Everything comes together here. This is a simulated environment where you can see how to wire
-everything up and even tweak with some parameters for your dApp.
 
 ## Architecture
 

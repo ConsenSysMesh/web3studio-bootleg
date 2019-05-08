@@ -51,6 +51,46 @@ Private Keys
 
 <br/>
 
+## Bootleg file encryption steps
+
+For this demo app the [dONT](https://github.com/ConsenSys/web3studio-dONT) was not ready.
+Instead we created a used AES 256 symmetric encryption. The steps are below:
+
+### Prerequisites
+
+You need to have OpenSSL installed and on the system path.
+
+### Encrypting
+
+Encrypt the file using the OpenSSL toolkit. Your password should be 32 random characters. You can generate
+one with the command below.
+
+```bash
+openssl rand -base64 32
+```
+
+```bash
+openssl aes-256-cbc -salt -in outsideOUTSIDE-SXSW2019-Bootleg.raw.mp4 -out outsideOUTSIDE-SXSW2019-Bootleg.enc -k <PASSWORD_GOES_HERE>
+```
+
+### Uploading
+
+Upload the file to the existing s3 bucket
+
+```bash
+aws s3 cp outsideOUTSIDE-SXSW2019-Bootleg.enc s3://web3studio-bootlegs/outsideOUTSIDE-SXSW2019-Bootleg.mp4
+```
+
+### Tagging to make it public
+
+We followed [this method of tagging s3 objects](https://aws.amazon.com/premiumsupport/knowledge-center/read-access-objects-s3-bucket/) to make the media files for the token publicly accessible.
+
+From the command line you can set the tag like this.
+
+```
+aws s3api put-object-tagging --bucket web3studio-bootlegs --key outsideOUTSIDE-SXSW2019-Bootleg.mp4 --tagging '{"TagSet": [{"Key":"public","Value":"yes"}]}'
+```
+
 ## License
 
 [Apache 2.0](LICENSE)
