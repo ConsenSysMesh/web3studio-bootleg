@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity 0.5.4;
 
 import "bootleg-tokens/contracts/BookendSharedRoyaltyToken.sol";
 import "bootleg-tokens/contracts/ERC721/ERC721Enumerable.sol";
@@ -15,9 +15,8 @@ contract BootlegToken is ERC721MetadataMintable, BookendSharedRoyaltyToken, ERC7
    * @param name - Name of the tokens created
    * @param symbol - Symbol of the tokens created
    */
-  constructor (string memory name, string memory symbol, uint256 franchisorPercentage)
-    ERC721Metadata(name, symbol) BookendSharedRoyaltyToken(franchisorPercentage) public
-  {} // solium-disable-line no-empty-blocks
+  constructor (string memory name, string memory symbol, uint256 franchisorPercentage) public
+    ERC721Metadata(name, symbol) BookendSharedRoyaltyToken(franchisorPercentage) {} // solhint-disable-line no-empty-blocks
 
   /**
    * @notice Allow the minter to add franchisors. Used for assigning more than one initial position
@@ -40,7 +39,7 @@ contract BootlegToken is ERC721MetadataMintable, BookendSharedRoyaltyToken, ERC7
   * @notice Returns true if the provide address is a token franchisor, false if not.
   * @param possibleFranchisor address The address of the possible franchisor
   * @param tokenId uint256 The id of the token
-  * @return bool 
+  * @return bool
   */
   function isTokenFranchisor(address possibleFranchisor, uint256 tokenId) public view returns (bool) {
     return _isFranchisor(possibleFranchisor, tokenId);

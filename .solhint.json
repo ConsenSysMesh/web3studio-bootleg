@@ -1,0 +1,6 @@
+{
+  "extends": ["solhint:recommended", "web3studio"],
+  "rules": {
+    "compiler-version": ["error", "0.5.4"]
+  }
+}
