@@ -1,1 +1,1 @@
-require('bootleg-common/mochaGlobal');
+require('web3studio-helpers/truffleTestGlobals');

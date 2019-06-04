@@ -1,1 +1,1 @@
-module.exports = require('bootleg-common/truffle-config')(__dirname);
+module.exports = require('web3studio-helpers/truffle-config')(__dirname);
