@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "concurrently -n w: npm:start:*",
-    "start:web": ". bootleg-setup-ganache; react-scripts start",
+    "start:web": ". w3s-setup-ganache; react-scripts start",
     "start:migrate": "lerna run migrate --scope bootleg-app-contracts -- -- --skip-dry-run --network=development --contracts_build_directory=$(pwd)/src/build/contracts",
     "test": "yarn contracts:build && CI=true react-scripts test --env=jsdom",
     "contracts:build": "lerna run build --scope bootleg-app-contracts -- --contracts_build_directory=$(pwd)/src/build/contracts",

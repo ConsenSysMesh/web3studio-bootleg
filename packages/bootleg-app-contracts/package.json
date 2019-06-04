@@ -10,8 +10,8 @@
     "url": "git+https://github.com/ConsenSys/web3studio-bootleg.git"
   },
   "scripts": {
-    "test": "bootleg-truffle-test",
-    "test:watch": ". bootleg-setup-ganache; chokidar --initial \"test/**/*.js\" \"contracts/**/*.sol\" -c \"yarn test\"",
+    "test": "w3s-truffle-test",
+    "test:watch": ". w3s-setup-ganache; chokidar --initial \"test/**/*.js\" \"contracts/**/*.sol\" -c \"yarn test\"",
     "truffle": "truffle",
     "build": "truffle compile",
     "migrate": "truffle migrate --reset"
