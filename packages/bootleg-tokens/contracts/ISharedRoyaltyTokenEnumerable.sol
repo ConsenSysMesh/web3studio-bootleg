@@ -1,4 +1,4 @@
-pragma solidity ^0.5.3;
+pragma solidity 0.5.4;
 
 /**
 * @title Shared royalty NFT enumerable interface for franchisors, payments, and tokens

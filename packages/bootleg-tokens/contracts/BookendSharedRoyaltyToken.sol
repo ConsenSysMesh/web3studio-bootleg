@@ -1,4 +1,4 @@
-pragma solidity ^0.5.3;
+pragma solidity 0.5.4;
 
 import "./AbstractSharedRoyaltyToken.sol";
 
@@ -6,7 +6,7 @@ import "./AbstractSharedRoyaltyToken.sol";
  * @title Shared Royalty Non-Fungible Token Standard basic interface
  */
 contract BookendSharedRoyaltyToken is AbstractSharedRoyaltyToken {
-  uint256 franchisorPercentage;
+  uint256 public franchisorPercentage;
 
   constructor(uint256 _franchisorPercentage) public {
     franchisorPercentage = _franchisorPercentage;
