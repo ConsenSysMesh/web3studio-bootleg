@@ -703,7 +703,7 @@ GEM
     aws-sigv2 (1.0.1)
     aws-sigv4 (1.1.0)
       aws-eventstream (~> 1.0, >= 1.0.2)
-    jmespath (1.4.0)
+    jmespath (1.6.1)
     unicode-display_width (1.5.0)
     whirly (0.2.6)
       unicode-display_width (~> 1.1)
